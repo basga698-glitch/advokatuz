@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Юридическая практика — Выбор адвоката</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#060D0B] text-slate-100 font-sans min-h-screen antialiased flex flex-col justify-between">
+
+  <!-- Шапка -->
+  <header class="border-b border-emerald-950/60 bg-[#060D0B]/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-800/50 flex items-center justify-center text-emerald-400 text-xl shadow-lg">
+          <i class="fa-solid fa-scale-balanced"></i>
+        </div>
+        <div>
+          <span class="text-xl font-black text-white tracking-tight" id="siteTitle">ЮРИДИЧЕСКАЯ <span class="text-emerald-400">ПРАКТИКА</span></span>
+          <span class="block text-[10px] text-slate-400 uppercase tracking-widest font-semibold" id="siteSubtitle">Выберите специалиста</span>
+        </div>
+      </div>
+
+      <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА -->
+      <button onclick="toggleLang()" class="bg-emerald-950/80 border border-emerald-800/60 hover:border-emerald-500 text-emerald-300 font-bold px-3 py-1.5 rounded-xl text-xs transition flex items-center space-x-1">
+        <i class="fa-solid fa-globe text-emerald-400"></i>
+        <span id="langBtnText">O'ZB</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Список адвокатов -->
+  <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12 flex-1 w-full space-y-8">
+    <div class="text-center max-w-xl mx-auto space-y-2">
+      <h1 class="text-2xl sm:text-3xl font-black text-white" id="mainHeader">Персональная юридическая помощь</h1>
+      <p class="text-xs sm:text-sm text-slate-400" id="mainSubHeader">Запишитесь на прямую консультацию к выбранному адвокату</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- 1. АЛИШЕР КАРИМОВ -->
+      <div class="bg-[#0B1713] border border-emerald-900/50 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6 hover:border-emerald-500/50 transition duration-300">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4">
+            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=400&auto=format&fit=crop" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500 shadow-md">
+            <div>
+              <span class="text-emerald-400 text-[10px] font-bold uppercase tracking-widest" id="office1Tag">Личный офис №1</span>
+              <h2 class="text-xl font-black text-white">Алишер Каримов</h2>
+              <p class="text-xs text-slate-400 font-medium" id="exp1">16 лет стажа • <span class="text-emerald-300">★ 5.0</span></p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed" id="desc1">
+            Специализируется на уголовных делах высокой сложности, защите бизнеса и экономических спорах.
+          </p>
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <span class="bg-[#060D0B] border border-emerald-950 text-emerald-300 text-[11px] px-2.5 py-1 rounded-lg" id="tag1_1">Уголовное право</span>
+            <span class="bg-[#060D0B] border border-emerald-950 text-emerald-300 text-[11px] px-2.5 py-1 rounded-lg" id="tag1_2">Защита бизнеса</span>
+          </div>
+        </div>
+
+        <button onclick="openForm('karimov', 'Алишер Каримов')" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg" id="btn1">
+          Записаться к Каримову
+        </button>
+      </div>
+
+      <!-- 2. ИКРОМ АЗИМОВ -->
+      <div class="bg-[#0B1713] border border-emerald-900/50 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6 hover:border-emerald-500/50 transition duration-300">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500 shadow-md">
+            <div>
+              <span class="text-emerald-400 text-[10px] font-bold uppercase tracking-widest" id="office2Tag">Личный офис №2</span>
+              <h2 class="text-xl font-black text-white">Икром Азимов</h2>
+              <p class="text-xs text-slate-400 font-medium" id="exp2">14 лет стажа • <span class="text-emerald-300">★ 4.9</span></p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed" id="desc2">
+            Эксперт по гражданским спорам, недвижимости, арбитражным процессам и семейным делам.
+          </p>
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <span class="bg-[#060D0B] border border-emerald-950 text-emerald-300 text-[11px] px-2.5 py-1 rounded-lg" id="tag2_1">Гражданские споры</span>
+            <span class="bg-[#060D0B] border border-emerald-950 text-emerald-300 text-[11px] px-2.5 py-1 rounded-lg" id="tag2_2">Недвижимость</span>
+          </div>
+        </div>
+
+        <button onclick="openForm('azimov', 'Икром Азимов')" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg" id="btn2">
+          Записаться к Азимову
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- МОДАЛЬНОЕ ОКНО -->
+  <div id="formModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#0B1713] border border-emerald-900/80 rounded-3xl max-w-md w-full p-6 space-y-4 relative shadow-2xl">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+
+      <div>
+        <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block" id="modalSub">Запись на прием</span>
+        <h3 id="targetAdvokatTitle" class="text-xl font-black text-white mt-1">Запись</h3>
+      </div>
+
+      <form id="appointmentForm" class="space-y-3">
+        <input type="hidden" id="advokat_id" value="">
+        <input type="hidden" id="advokat_name" value="">
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" id="labelName">Ваше имя</label>
+          <input type="text" id="client_name" required placeholder="Введите имя" class="w-full bg-[#060D0B] border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" id="labelPhone">Номер телефона</label>
+          <input type="tel" id="client_phone" required placeholder="+998" class="w-full bg-[#060D0B] border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" id="labelDesc">Суть вопроса</label>
+          <textarea id="description" rows="3" placeholder="Кратко опишите ситуацию..." class="w-full bg-[#060D0B] border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500 resize-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3.5 rounded-xl transition text-xs uppercase tracking-wider shadow-lg" id="btnSubmit">Отправить заявку</button>
+      </form>
+      <div id="status" class="text-center text-xs font-bold min-h-[16px]"></div>
+    </div>
+  </div>
+
+  <footer class="border-t border-emerald-950/60 bg-[#060D0B] py-4 text-center text-xs text-slate-500" id="footerText">
+    © 2026 Независимая адвокатская практика.
+  </footer>
+
+  <script>
+    let currentLang = 'ru';
+
+    const t = {
+      ru: {
+        siteSubtitle: "Выберите специалиста",
+        mainHeader: "Персональная юридическая помощь",
+        mainSubHeader: "Запишитесь на прямую консультацию к выбранному адвокату",
+        office1Tag: "Личный офис №1",
+        exp1: "16 лет стажа • ★ 5.0",
+        desc1: "Специализируется на уголовных делах высокой сложности, защите бизнеса и экономических спорах.",
+        tag1_1: "Уголовное право",
+        tag1_2: "Защита бизнеса",
+        btn1: "Записаться к Каримову",
+        office2Tag: "Личный офис №2",
+        exp2: "14 лет стажа • ★ 4.9",
+        desc2: "Эксперт по гражданским спорам, недвижимости, арбитражным процессам и семейным делам.",
+        tag2_1: "Гражданские споры",
+        tag2_2: "Недвижимость",
+        btn2: "Записаться к Азимову",
+        modalSub: "Запись на прием",
+        labelName: "Ваше имя",
+        labelPhone: "Номер телефона",
+        labelDesc: "Суть вопроса",
+        btnSubmit: "Отправить заявку",
+        footerText: "© 2026 Независимая адвокатская практика.",
+        langBtn: "O'ZB"
+      },
+      uz: {
+        siteSubtitle: "Mutaxassisni tanlang",
+        mainHeader: "Shaxsiy yuridik yordam",
+        mainSubHeader: "Tanlangan advokat qabuliga to'g'ridan-to me'roatga yoziling",
+        office1Tag: "Shaxsiy idora №1",
+        exp1: "16 yillik tajriba • ★ 5.0",
+        desc1: "O'ta murakkab jinoyat ishlari, biznesni himoya qilish va iqtisodiy nizolarga ixtisoslashgan.",
+        tag1_1: "Jinoyat huquqi",
+        tag1_2: "Biznes himoyasi",
+        btn1: "Karimovga yozilish",
+        office2Tag: "Shaxsiy idora №2",
+        exp2: "14 yillik tajriba • ★ 4.9",
+        desc2: "Fuqarolik nizolari, ko'chmas mulk, arbitraj jarayonlari va oilaviy ishlar bo'yicha ekspert.",
+        tag2_1: "Fuqarolik nizolari",
+        tag2_2: "Ko'chmas mulk",
+        btn2: "Azimovga yozilish",
+        modalSub: "Qabulga yozilish",
+        labelName: "Ismingiz",
+        labelPhone: "Telefon raqamingiz",
+        labelDesc: "Murojaat mazmuni",
+        btnSubmit: "Arizani yuborish",
+        footerText: "© 2026 Mustaqil advokatlik amaliyoti.",
+        langBtn: "РУС"
+      }
+    };
+
+    function toggleLang() {
+      currentLang = currentLang === 'ru' ? 'uz' : 'ru';
+      applyLang();
+    }
+
+    function applyLang() {
+      const data = t[currentLang];
+      document.getElementById('langBtnText').innerText = data.langBtn;
+      document.getElementById('siteSubtitle').innerText = data.siteSubtitle;
+      document.getElementById('mainHeader').innerText = data.mainHeader;
+      document.getElementById('mainSubHeader').innerText = data.mainSubHeader;
+      document.getElementById('office1Tag').innerText = data.office1Tag;
+      document.getElementById('exp1').innerHTML = data.exp1.replace('★ 5.0', '<span class="text-emerald-300">★ 5.0</span>');
+      document.getElementById('desc1').innerText = data.desc1;
+      document.getElementById('tag1_1').innerText = data.tag1_1;
+      document.getElementById('tag1_2').innerText = data.tag1_2;
+      document.getElementById('btn1').innerText = data.btn1;
+
+      document.getElementById('office2Tag').innerText = data.office2Tag;
+      document.getElementById('exp2').innerHTML = data.exp2.replace('★ 4.9', '<span class="text-emerald-300">★ 4.9</span>');
+      document.getElementById('desc2').innerText = data.desc2;
+      document.getElementById('tag2_1').innerText = data.tag2_1;
+      document.getElementById('tag2_2').innerText = data.tag2_2;
+      document.getElementById('btn2').innerText = data.btn2;
+
+      document.getElementById('modalSub').innerText = data.modalSub;
+      document.getElementById('labelName').innerText = data.labelName;
+      document.getElementById('labelPhone').innerText = data.labelPhone;
+      document.getElementById('labelDesc').innerText = data.labelDesc;
+      document.getElementById('btnSubmit').innerText = data.btnSubmit;
+      document.getElementById('footerText').innerText = data.footerText;
+    }
+
+    function openForm(id, name) {
+      document.getElementById('advokat_id').value = id;
+      document.getElementById('advokat_name').value = name;
+      document.getElementById('targetAdvokatTitle').innerText = (currentLang === 'ru' ? 'Запись к: ' : 'Qabulga: ') + name;
+      document.getElementById('formModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('formModal').classList.add('hidden');
+      document.getElementById('status').innerText = '';
+    }
+
+    document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('status');
+      status.innerText = currentLang === 'ru' ? 'Отправка...' : 'Yuborilmoqda...';
+
+      const advId = document.getElementById('advokat_id').value;
+      const advName = document.getElementById('advokat_name').value;
+
+      try {
+        const res = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            client_name: document.getElementById('client_name').value,
+            client_phone: document.getElementById('client_phone').value,
+            description: `[ID:${advId}] [Адвокат: ${advName}] ${document.getElementById('description').value}`
+          })
+        });
+
+        if (res.ok) {
+          status.className = "text-center text-xs font-bold text-emerald-400";
+          status.innerText = currentLang === 'ru' ? `✅ Заявка передана лично ${advName}!` : `✅ Ariza ${advName}ga topshirildi!`;
+          document.getElementById('appointmentForm').reset();
+          setTimeout(() => { closeModal(); }, 2000);
+        }
+      } catch (err) {
+        status.innerText = currentLang === 'ru' ? '❌ Ошибка сети.' : '❌ Tarmoq xatosi.';
+      }
+    });
+  </script>
+</body>
+</html>
