@@ -3,182 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Юридическая практика — Выбор адвоката</title>
+  <title>ADVOKATUZ — Адвокатские услуги в Ташкенте</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/socket.io/socket.io.js"></script>
 </head>
-<body class="bg-[#060D0B] text-slate-100 font-sans min-h-screen antialiased flex flex-col justify-between">
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between antialiased">
 
-  <!-- Шапка -->
-  <header class="border-b border-emerald-950/60 bg-[#060D0B]/90 backdrop-blur-md sticky top-0 z-40">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+  <!-- ШАПКА / ХЕДЕР -->
+  <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      
+      <!-- ЛОГОТИП ADVOKATUZ -->
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-800/50 flex items-center justify-center text-emerald-400 text-xl shadow-lg">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-emerald-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg">
           <i class="fa-solid fa-scale-balanced"></i>
         </div>
         <div>
-          <span class="text-xl font-black text-white tracking-tight" id="siteTitle">ЮРИДИЧЕСКАЯ <span class="text-emerald-400">ПРАКТИКА</span></span>
-          <span class="block text-[10px] text-slate-400 uppercase tracking-widest font-semibold" id="siteSubtitle">Выберите специалиста</span>
+          <span class="text-xl font-black text-white tracking-widest uppercase block leading-none">ADVOKAT<span class="text-amber-400">UZ</span></span>
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold" id="headerTag">Юридическая помощь в Узбекистане</span>
         </div>
       </div>
 
-      <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА -->
-      <button onclick="toggleLang()" class="bg-emerald-950/80 border border-emerald-800/60 hover:border-emerald-500 text-emerald-300 font-bold px-3 py-1.5 rounded-xl text-xs transition flex items-center space-x-1">
-        <i class="fa-solid fa-globe text-emerald-400"></i>
+      <!-- ЯЗЫКОВОЙ ПЕРЕКЛЮЧАТЕЛЬ -->
+      <button onclick="toggleLang()" class="bg-slate-900 border border-slate-800 hover:border-slate-600 text-slate-300 font-bold px-3 py-1.5 rounded-xl text-xs transition flex items-center space-x-1">
+        <i class="fa-solid fa-globe text-amber-400"></i>
         <span id="langBtnText">O'ZB</span>
       </button>
+
     </div>
   </header>
 
-  <!-- Список адвокатов -->
-  <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12 flex-1 w-full space-y-8">
-    <div class="text-center max-w-xl mx-auto space-y-2">
-      <h1 class="text-2xl sm:text-3xl font-black text-white" id="mainHeader">Персональная юридическая помощь</h1>
-      <p class="text-xs sm:text-sm text-slate-400" id="mainSubHeader">Запишитесь на прямую консультацию к выбранному адвокату</p>
-    </div>
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full space-y-10">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- ГЛАВНЫЙ БАННЕР -->
+    <section class="text-center space-y-4">
+      <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 px-4 py-1.5 rounded-full text-xs text-amber-400 font-semibold mb-2">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span id="heroBadge">Профессиональная защита ваших прав</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight" id="heroTitle">
+        Нужна помощь адвоката?
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed" id="heroSubtitle">
+        Выберите адвоката и отправьте заявку. Мы свяжемся с вами в ближайшее время для консультации.
+      </p>
+    </section>
+
+    <!-- ВЫБОР АДВОКАТА И ФОРМА -->
+    <section class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
       
-      <!-- 1. АЛИШЕР КАРИМОВ -->
-      <div class="bg-[#0B1713] border border-emerald-900/50 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6 hover:border-emerald-500/50 transition duration-300">
-        <div class="space-y-4">
-          <div class="flex items-center space-x-4">
-            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=400&auto=format&fit=crop" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500 shadow-md">
+      <div class="space-y-3">
+        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider" id="selectLawyerLabel">Выберите адвоката:</label>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- КАРИМОВ -->
+          <div id="cardKarimov" onclick="selectLawyer('karimov')" class="cursor-pointer bg-slate-950 border-2 border-amber-500 rounded-2xl p-4 transition flex items-center space-x-4 relative">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl font-bold">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
             <div>
-              <span class="text-emerald-400 text-[10px] font-bold uppercase tracking-widest" id="office1Tag">Личный офис №1</span>
-              <h2 class="text-xl font-black text-white">Алишер Каримов</h2>
-              <p class="text-xs text-slate-400 font-medium" id="exp1">16 лет стажа • <span class="text-emerald-300">★ 5.0</span></p>
+              <h3 class="font-bold text-white text-base">Алишер Каримов</h3>
+              <p class="text-xs text-amber-400 font-medium" id="karimovRole">Адвокат по уголовным и гражданским делам</p>
             </div>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed" id="desc1">
-            Специализируется на уголовных делах высокой сложности, защите бизнеса и экономических спорах.
-          </p>
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="bg-[#060D0B] border border-emerald-950 text-emerald-300 text-[11px] px-2.5 py-1 rounded-lg" id="tag1_1">Уголовное право</span>
-            <span class="bg-[#060D0B] border border-emerald-950 text-emerald-300 text-[11px] px-2.5 py-1 rounded-lg" id="tag1_2">Защита бизнеса</span>
-          </div>
-        </div>
 
-        <button onclick="openForm('karimov', 'Алишер Каримов')" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg" id="btn1">
-          Записаться к Каримову
-        </button>
-      </div>
-
-      <!-- 2. ИКРОМ АЗИМОВ -->
-      <div class="bg-[#0B1713] border border-emerald-900/50 rounded-3xl p-6 shadow-2xl flex flex-col justify-between space-y-6 hover:border-emerald-500/50 transition duration-300">
-        <div class="space-y-4">
-          <div class="flex items-center space-x-4">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500 shadow-md">
+          <!-- АЗИМОВ -->
+          <div id="cardAzimov" onclick="selectLawyer('azimov')" class="cursor-pointer bg-slate-950 border-2 border-slate-800 hover:border-slate-700 rounded-2xl p-4 transition flex items-center space-x-4 relative">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
             <div>
-              <span class="text-emerald-400 text-[10px] font-bold uppercase tracking-widest" id="office2Tag">Личный офис №2</span>
-              <h2 class="text-xl font-black text-white">Икром Азимов</h2>
-              <p class="text-xs text-slate-400 font-medium" id="exp2">14 лет стажа • <span class="text-emerald-300">★ 4.9</span></p>
+              <h3 class="font-bold text-white text-base">Икром Азимов</h3>
+              <p class="text-xs text-emerald-400 font-medium" id="azimovRole">Адвокат по экономическим и семейным спорам</p>
             </div>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed" id="desc2">
-            Эксперт по гражданским спорам, недвижимости, арбитражным процессам и семейным делам.
-          </p>
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="bg-[#060D0B] border border-emerald-950 text-emerald-300 text-[11px] px-2.5 py-1 rounded-lg" id="tag2_1">Гражданские споры</span>
-            <span class="bg-[#060D0B] border border-emerald-950 text-emerald-300 text-[11px] px-2.5 py-1 rounded-lg" id="tag2_2">Недвижимость</span>
-          </div>
         </div>
-
-        <button onclick="openForm('azimov', 'Икром Азимов')" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg" id="btn2">
-          Записаться к Азимову
-        </button>
       </div>
 
-    </div>
+      <!-- ФОРМА ОТПРАВКИ -->
+      <form id="leadForm" onsubmit="submitForm(event)" class="space-y-4 pt-2">
+        <div>
+          <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="nameLabel">Ваше имя</label>
+          <input type="text" id="clientName" required placeholder="Иван Иванов" class="w-full bg-slate-950 border border-slate-800 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="phoneLabel">Номер телефона</label>
+          <input type="tel" id="clientPhone" required placeholder="+998 90 123 45 67" class="w-full bg-slate-950 border border-slate-800 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="descLabel">Кратко опишите вашу проблему</label>
+          <textarea id="clientDesc" rows="3" placeholder="Опишите ситуацию..." class="w-full bg-slate-950 border border-slate-800 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition resize-none"></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-4 rounded-xl text-sm uppercase tracking-wider transition shadow-lg shadow-amber-500/10 flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span id="submitBtnText">Отправить заявку</span>
+        </button>
+      </form>
+
+      <!-- УВЕДОМЛЕНИЕ ОБ УСПЕШНОЙ ОТПРАВКЕ -->
+      <div id="successMessage" class="hidden bg-emerald-950/80 border border-emerald-500/40 rounded-2xl p-6 text-center space-y-2">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-4xl block mb-2"></i>
+        <h3 class="text-lg font-bold text-white" id="successTitle">Заявка успешно отправлена!</h3>
+        <p class="text-xs text-emerald-300" id="successText">Адвокат свяжется с вами в ближайшее время.</p>
+      </div>
+
+    </section>
+
   </main>
 
-  <!-- МОДАЛЬНОЕ ОКНО -->
-  <div id="formModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-[#0B1713] border border-emerald-900/80 rounded-3xl max-w-md w-full p-6 space-y-4 relative shadow-2xl">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
-
-      <div>
-        <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block" id="modalSub">Запись на прием</span>
-        <h3 id="targetAdvokatTitle" class="text-xl font-black text-white mt-1">Запись</h3>
-      </div>
-
-      <form id="appointmentForm" class="space-y-3">
-        <input type="hidden" id="advokat_id" value="">
-        <input type="hidden" id="advokat_name" value="">
-
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1" id="labelName">Ваше имя</label>
-          <input type="text" id="client_name" required placeholder="Введите имя" class="w-full bg-[#060D0B] border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1" id="labelPhone">Номер телефона</label>
-          <input type="tel" id="client_phone" required placeholder="+998" class="w-full bg-[#060D0B] border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1" id="labelDesc">Суть вопроса</label>
-          <textarea id="description" rows="3" placeholder="Кратко опишите ситуацию..." class="w-full bg-[#060D0B] border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500 resize-none"></textarea>
-        </div>
-        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3.5 rounded-xl transition text-xs uppercase tracking-wider shadow-lg" id="btnSubmit">Отправить заявку</button>
-      </form>
-      <div id="status" class="text-center text-xs font-bold min-h-[16px]"></div>
+  <!-- ФУТЕР -->
+  <footer class="border-t border-slate-900 bg-slate-950 py-6 text-center space-y-3">
+    <div class="text-xs text-slate-500" id="footerRights">
+      © ADVOKATUZ • Все права защищены
     </div>
-  </div>
-
-  <footer class="border-t border-emerald-950/60 bg-[#060D0B] py-4 text-center text-xs text-slate-500" id="footerText">
-    © 2026 Независимая адвокатская практика.
+    <!-- Скрытые ссылки на кабинеты -->
+    <div class="flex space-x-4 justify-center text-[11px] text-slate-600">
+      <a href="/admin-karimov.html" class="hover:text-amber-400 transition" id="footerKarimov">Кабинет А. Каримова</a>
+      <span>•</span>
+      <a href="/admin-azimov.html" class="hover:text-emerald-400 transition" id="footerAzimov">Кабинет И. Азимова</a>
+    </div>
   </footer>
 
   <script>
+    let selectedLawyerId = 'karimov';
     let currentLang = 'ru';
 
-    const t = {
+    const dict = {
       ru: {
-        siteSubtitle: "Выберите специалиста",
-        mainHeader: "Персональная юридическая помощь",
-        mainSubHeader: "Запишитесь на прямую консультацию к выбранному адвокату",
-        office1Tag: "Личный офис №1",
-        exp1: "16 лет стажа • ★ 5.0",
-        desc1: "Специализируется на уголовных делах высокой сложности, защите бизнеса и экономических спорах.",
-        tag1_1: "Уголовное право",
-        tag1_2: "Защита бизнеса",
-        btn1: "Записаться к Каримову",
-        office2Tag: "Личный офис №2",
-        exp2: "14 лет стажа • ★ 4.9",
-        desc2: "Эксперт по гражданским спорам, недвижимости, арбитражным процессам и семейным делам.",
-        tag2_1: "Гражданские споры",
-        tag2_2: "Недвижимость",
-        btn2: "Записаться к Азимову",
-        modalSub: "Запись на прием",
-        labelName: "Ваше имя",
-        labelPhone: "Номер телефона",
-        labelDesc: "Суть вопроса",
-        btnSubmit: "Отправить заявку",
-        footerText: "© 2026 Независимая адвокатская практика.",
-        langBtn: "O'ZB"
+        langBtn: "O'ZB",
+        headerTag: "Юридическая помощь в Узбекистане",
+        heroBadge: "Профессиональная защита ваших прав",
+        heroTitle: "Нужна помощь адвоката?",
+        heroSubtitle: "Выберите адвоката и отправьте заявку. Мы свяжемся с вами в ближайшее время для консультации.",
+        selectLawyerLabel: "Выберите адвоката:",
+        karimovRole: "Адвокат по уголовным и гражданским делам",
+        azimovRole: "Адвокат по экономическим и семейным спорам",
+        nameLabel: "Ваше имя",
+        phoneLabel: "Номер телефона",
+        descLabel: "Кратко опишите вашу проблему",
+        namePlaceholder: "Иван Иванов",
+        descPlaceholder: "Опишите ситуацию...",
+        submitBtn: "Отправить заявку",
+        successTitle: "Заявка успешно отправлена!",
+        successText: "Адвокат свяжется с вами в ближайшее время.",
+        footerRights: "© ADVOKATUZ • Все права защищены",
+        footerKarimov: "Кабинет А. Каримова",
+        footerAzimov: "Кабинет И. Азимова"
       },
       uz: {
-        siteSubtitle: "Mutaxassisni tanlang",
-        mainHeader: "Shaxsiy yuridik yordam",
-        mainSubHeader: "Tanlangan advokat qabuliga to'g'ridan-to me'roatga yoziling",
-        office1Tag: "Shaxsiy idora №1",
-        exp1: "16 yillik tajriba • ★ 5.0",
-        desc1: "O'ta murakkab jinoyat ishlari, biznesni himoya qilish va iqtisodiy nizolarga ixtisoslashgan.",
-        tag1_1: "Jinoyat huquqi",
-        tag1_2: "Biznes himoyasi",
-        btn1: "Karimovga yozilish",
-        office2Tag: "Shaxsiy idora №2",
-        exp2: "14 yillik tajriba • ★ 4.9",
-        desc2: "Fuqarolik nizolari, ko'chmas mulk, arbitraj jarayonlari va oilaviy ishlar bo'yicha ekspert.",
-        tag2_1: "Fuqarolik nizolari",
-        tag2_2: "Ko'chmas mulk",
-        btn2: "Azimovga yozilish",
-        modalSub: "Qabulga yozilish",
-        labelName: "Ismingiz",
-        labelPhone: "Telefon raqamingiz",
-        labelDesc: "Murojaat mazmuni",
-        btnSubmit: "Arizani yuborish",
-        footerText: "© 2026 Mustaqil advokatlik amaliyoti.",
-        langBtn: "РУС"
+        langBtn: "РУС",
+        headerTag: "O'zbekistonda yuridik yordam",
+        heroBadge: "Huquqlaringizni professional himoya qilish",
+        heroTitle: "Advokat yordami kerakmi?",
+        heroSubtitle: "Advokatni tanlang va ariza yuboring. Maslahat uchun tez orada siz bilan bog'lanamiz.",
+        selectLawyerLabel: "Advokatni tanlang:",
+        karimovRole: "Jinoyat va fuqarolik ishlari bo'yicha advokat",
+        azimovRole: "Iqtisodiy va oilaviy nizolar bo'yicha advokat",
+        nameLabel: "Ismingiz",
+        phoneLabel: "Telefon raqamingiz",
+        descLabel: "Muammoingizni qisqacha tasvirlab bering",
+        namePlaceholder: "Eshmat Eshmatov",
+        descPlaceholder: "Vaziyatni tasvirlab bering...",
+        submitBtn: "Arizani yuborish",
+        successTitle: "Ariza muvaffaqiyatli yuborildi!",
+        successText: "Advokat tez orada siz bilan bog'lanadi.",
+        footerRights: "© ADVOKATUZ • Barcha huquqlar himoyalangan",
+        footerKarimov: "A. Karimov kabineti",
+        footerAzimov: "I. Azimov kabineti"
       }
     };
 
@@ -188,74 +184,74 @@
     }
 
     function applyLang() {
-      const data = t[currentLang];
-      document.getElementById('langBtnText').innerText = data.langBtn;
-      document.getElementById('siteSubtitle').innerText = data.siteSubtitle;
-      document.getElementById('mainHeader').innerText = data.mainHeader;
-      document.getElementById('mainSubHeader').innerText = data.mainSubHeader;
-      document.getElementById('office1Tag').innerText = data.office1Tag;
-      document.getElementById('exp1').innerHTML = data.exp1.replace('★ 5.0', '<span class="text-emerald-300">★ 5.0</span>');
-      document.getElementById('desc1').innerText = data.desc1;
-      document.getElementById('tag1_1').innerText = data.tag1_1;
-      document.getElementById('tag1_2').innerText = data.tag1_2;
-      document.getElementById('btn1').innerText = data.btn1;
+      const d = dict[currentLang];
+      document.getElementById('langBtnText').innerText = d.langBtn;
+      document.getElementById('headerTag').innerText = d.headerTag;
+      document.getElementById('heroBadge').innerText = d.heroBadge;
+      document.getElementById('heroTitle').innerText = d.heroTitle;
+      document.getElementById('heroSubtitle').innerText = d.heroSubtitle;
+      document.getElementById('selectLawyerLabel').innerText = d.selectLawyerLabel;
+      document.getElementById('karimovRole').innerText = d.karimovRole;
+      document.getElementById('azimovRole').innerText = d.azimovRole;
+      document.getElementById('nameLabel').innerText = d.nameLabel;
+      document.getElementById('phoneLabel').innerText = d.phoneLabel;
+      document.getElementById('descLabel').innerText = d.descLabel;
+      
+      // Перевод подсказок в полях ввода (placeholder)
+      document.getElementById('clientName').placeholder = d.namePlaceholder;
+      document.getElementById('clientDesc').placeholder = d.descPlaceholder;
 
-      document.getElementById('office2Tag').innerText = data.office2Tag;
-      document.getElementById('exp2').innerHTML = data.exp2.replace('★ 4.9', '<span class="text-emerald-300">★ 4.9</span>');
-      document.getElementById('desc2').innerText = data.desc2;
-      document.getElementById('tag2_1').innerText = data.tag2_1;
-      document.getElementById('tag2_2').innerText = data.tag2_2;
-      document.getElementById('btn2').innerText = data.btn2;
+      // Перевод кнопки
+      document.getElementById('submitBtnText').innerText = d.submitBtn;
 
-      document.getElementById('modalSub').innerText = data.modalSub;
-      document.getElementById('labelName').innerText = data.labelName;
-      document.getElementById('labelPhone').innerText = data.labelPhone;
-      document.getElementById('labelDesc').innerText = data.labelDesc;
-      document.getElementById('btnSubmit').innerText = data.btnSubmit;
-      document.getElementById('footerText').innerText = data.footerText;
+      // Перевод сообщения об успехе
+      document.getElementById('successTitle').innerText = d.successTitle;
+      document.getElementById('successText').innerText = d.successText;
+
+      // Перевод футера
+      document.getElementById('footerRights').innerText = d.footerRights;
+      document.getElementById('footerKarimov').innerText = d.footerKarimov;
+      document.getElementById('footerAzimov').innerText = d.footerAzimov;
     }
 
-    function openForm(id, name) {
-      document.getElementById('advokat_id').value = id;
-      document.getElementById('advokat_name').value = name;
-      document.getElementById('targetAdvokatTitle').innerText = (currentLang === 'ru' ? 'Запись к: ' : 'Qabulga: ') + name;
-      document.getElementById('formModal').classList.remove('hidden');
+    function selectLawyer(id) {
+      selectedLawyerId = id;
+      const cardKarimov = document.getElementById('cardKarimov');
+      const cardAzimov = document.getElementById('cardAzimov');
+
+      if (id === 'karimov') {
+        cardKarimov.className = "cursor-pointer bg-slate-950 border-2 border-amber-500 rounded-2xl p-4 transition flex items-center space-x-4 relative";
+        cardAzimov.className = "cursor-pointer bg-slate-950 border-2 border-slate-800 hover:border-slate-700 rounded-2xl p-4 transition flex items-center space-x-4 relative";
+      } else {
+        cardAzimov.className = "cursor-pointer bg-slate-950 border-2 border-emerald-500 rounded-2xl p-4 transition flex items-center space-x-4 relative";
+        cardKarimov.className = "cursor-pointer bg-slate-950 border-2 border-slate-800 hover:border-slate-700 rounded-2xl p-4 transition flex items-center space-x-4 relative";
+      }
     }
 
-    function closeModal() {
-      document.getElementById('formModal').classList.add('hidden');
-      document.getElementById('status').innerText = '';
-    }
-
-    document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+    async function submitForm(e) {
       e.preventDefault();
-      const status = document.getElementById('status');
-      status.innerText = currentLang === 'ru' ? 'Отправка...' : 'Yuborilmoqda...';
+      const name = document.getElementById('clientName').value;
+      const phone = document.getElementById('clientPhone').value;
+      const desc = document.getElementById('clientDesc').value;
 
-      const advId = document.getElementById('advokat_id').value;
-      const advName = document.getElementById('advokat_name').value;
+      const tag = `[ID:${selectedLawyerId}]`;
+      const fullDesc = `${desc} ${tag}`;
 
       try {
         const res = await fetch('/api/leads', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            client_name: document.getElementById('client_name').value,
-            client_phone: document.getElementById('client_phone').value,
-            description: `[ID:${advId}] [Адвокат: ${advName}] ${document.getElementById('description').value}`
-          })
+          body: JSON.stringify({ client_name: name, client_phone: phone, description: fullDesc })
         });
 
         if (res.ok) {
-          status.className = "text-center text-xs font-bold text-emerald-400";
-          status.innerText = currentLang === 'ru' ? `✅ Заявка передана лично ${advName}!` : `✅ Ariza ${advName}ga topshirildi!`;
-          document.getElementById('appointmentForm').reset();
-          setTimeout(() => { closeModal(); }, 2000);
+          document.getElementById('leadForm').classList.add('hidden');
+          document.getElementById('successMessage').classList.remove('hidden');
         }
       } catch (err) {
-        status.innerText = currentLang === 'ru' ? '❌ Ошибка сети.' : '❌ Tarmoq xatosi.';
+        console.error('Ошибка отправки:', err);
       }
-    });
+    }
   </script>
 </body>
 </html>
