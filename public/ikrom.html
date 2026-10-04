@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Кабинет И. Азимова — ADVOKATUZ</title>
+  <title>Кабинет А. Каримова — ADVOKATUZ</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="/socket.io/socket.io.js"></script>
@@ -14,18 +14,18 @@
   <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black text-xl shadow-lg">
-          <i class="fa-solid fa-scale-balanced"></i>
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-black text-xl shadow-lg">
+          <i class="fa-solid fa-user-shield"></i>
         </div>
         <div>
-          <span class="text-xl font-black text-white tracking-widest uppercase block leading-none">ADVOKAT<span class="text-emerald-400">UZ</span></span>
-          <span class="text-xs text-emerald-400 font-semibold" id="cabinetOwner">Кабинет адвоката И. Азимова</span>
+          <span class="text-xl font-black text-white tracking-widest uppercase block leading-none">ADVOKAT<span class="text-amber-400">UZ</span></span>
+          <span class="text-xs text-amber-400 font-semibold" id="cabinetOwner">Кабинет адвоката А. Каримова</span>
         </div>
       </div>
 
       <!-- КНОПКА СМЕНЫ ЯЗЫКА -->
       <button onclick="toggleLang()" class="bg-slate-900 border border-slate-800 hover:border-slate-600 text-slate-300 font-bold px-3 py-1.5 rounded-xl text-xs transition flex items-center space-x-1">
-        <i class="fa-solid fa-globe text-emerald-400"></i>
+        <i class="fa-solid fa-globe text-amber-400"></i>
         <span id="langBtnText">O'ZB</span>
       </button>
     </div>
@@ -41,12 +41,12 @@
         <span class="text-3xl font-black text-white" id="statTotal">0</span>
       </div>
       <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
-        <span class="text-xs text-emerald-400 font-semibold uppercase tracking-wider block mb-1" id="statNewLabel">Новые</span>
-        <span class="text-3xl font-black text-emerald-400" id="statNew">0</span>
+        <span class="text-xs text-amber-400 font-semibold uppercase tracking-wider block mb-1" id="statNewLabel">Новые</span>
+        <span class="text-3xl font-black text-amber-400" id="statNew">0</span>
       </div>
       <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
-        <span class="text-xs text-blue-400 font-semibold uppercase tracking-wider block mb-1" id="statDoneLabel">Завершенные</span>
-        <span class="text-3xl font-black text-blue-400" id="statDone">0</span>
+        <span class="text-xs text-emerald-400 font-semibold uppercase tracking-wider block mb-1" id="statDoneLabel">Завершенные</span>
+        <span class="text-3xl font-black text-emerald-400" id="statDone">0</span>
       </div>
     </div>
 
@@ -54,7 +54,7 @@
     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
       <div class="p-4 border-b border-slate-800 flex items-center justify-between">
         <h2 class="font-bold text-white text-lg" id="tableTitle">Заявки клиентов</h2>
-        <span class="text-xs text-slate-500" id="autoUpdateText">Режим реального времени</span>
+        <span class="text-xs text-slate-500" id="autoUpdateText">Автообновление через Socket.io</span>
       </div>
 
       <div class="overflow-x-auto">
@@ -87,7 +87,7 @@
     const dict = {
       ru: {
         langBtn: "O'ZB",
-        cabinetOwner: "Кабинет адвоката И. Азимова",
+        cabinetOwner: "Кабинет адвоката А. Каримова",
         statTotalLabel: "Всего заявок",
         statNewLabel: "Новые",
         statDoneLabel: "Завершенные",
@@ -106,7 +106,7 @@
       },
       uz: {
         langBtn: "РУС",
-        cabinetOwner: "Advokat I. Azimov kabineti",
+        cabinetOwner: "Advokat A. Karimov kabineti",
         statTotalLabel: "Jami arizalar",
         statNewLabel: "Yangilar",
         statDoneLabel: "Yakunlangan",
@@ -152,8 +152,8 @@
       try {
         const res = await fetch('/api/leads');
         const data = await res.json();
-        // Фильтруем заявки адресованные Азимову
-        allLeads = data.filter(lead => lead.description.includes('[ID:azimov]'));
+        // Фильтруем заявки адресованные Каримову или без указания ID
+        allLeads = data.filter(lead => lead.description.includes('[ID:karimov]') || !lead.description.includes('[ID:'));
         renderLeads();
       } catch (err) {
         console.error(err);
@@ -181,22 +181,22 @@
         const dateStr = new Date(lead.created_at).toLocaleString();
 
         let statusBadge = '';
-        if (lead.status === 'new') statusBadge = `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-1 rounded-md text-xs font-semibold">${d.statusNew}</span>`;
+        if (lead.status === 'new') statusBadge = `<span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-1 rounded-md text-xs font-semibold">${d.statusNew}</span>`;
         else if (lead.status === 'in_progress') statusBadge = `<span class="bg-blue-500/10 text-blue-400 border border-blue-500/30 px-2 py-1 rounded-md text-xs font-semibold">${d.statusInWork}</span>`;
-        else statusBadge = `<span class="bg-slate-500/10 text-slate-400 border border-slate-500/30 px-2 py-1 rounded-md text-xs font-semibold">${d.statusDone}</span>`;
+        else statusBadge = `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-1 rounded-md text-xs font-semibold">${d.statusDone}</span>`;
 
         const tr = document.createElement('tr');
         tr.className = 'hover:bg-slate-900/50 transition';
         tr.innerHTML = `
           <td class="p-4 font-mono text-slate-500">#${lead.id}</td>
           <td class="p-4 font-bold text-white">${lead.client_name}</td>
-          <td class="p-4 text-emerald-400 font-mono">${lead.client_phone}</td>
+          <td class="p-4 text-amber-400 font-mono">${lead.client_phone}</td>
           <td class="p-4 max-w-xs truncate">${cleanDesc || '-'}</td>
           <td class="p-4">${statusBadge}</td>
           <td class="p-4 text-xs text-slate-500">${dateStr}</td>
           <td class="p-4 text-right space-x-2">
-            <button onclick="updateStatus(${lead.id}, 'in_progress')" class="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1.5 rounded-lg transition"><i class="fa-solid fa-clock text-emerald-400"></i></button>
-            <button onclick="updateStatus(${lead.id}, 'done')" class="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1.5 rounded-lg transition"><i class="fa-solid fa-check text-blue-400"></i></button>
+            <button onclick="updateStatus(${lead.id}, 'in_progress')" class="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1.5 rounded-lg transition"><i class="fa-solid fa-clock text-amber-400"></i></button>
+            <button onclick="updateStatus(${lead.id}, 'done')" class="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1.5 rounded-lg transition"><i class="fa-solid fa-check text-emerald-400"></i></button>
           </td>
         `;
         tbody.appendChild(tr);
