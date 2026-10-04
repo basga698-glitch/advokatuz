@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ADVOKATUZ — Адвокатские услуги в Ташкенте</title>
+  <title>ADVOKATUZ — Юридическая помощь в Узбекистане</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="/socket.io/socket.io.js"></script>
@@ -17,7 +17,7 @@
       <!-- ЛОГОТИП ADVOKATUZ -->
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-emerald-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg">
-          <i class="fa-solid fa-scale-balanced"></i>
+          ⚖️
         </div>
         <div>
           <span class="text-xl font-black text-white tracking-widest uppercase block leading-none">ADVOKAT<span class="text-amber-400">UZ</span></span>
@@ -58,24 +58,24 @@
         <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider" id="selectLawyerLabel">Выберите адвоката:</label>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- КАРИМОВ -->
+          <!-- АЛИШЕР КАРИМОВ -->
           <div id="cardKarimov" onclick="selectLawyer('karimov')" class="cursor-pointer bg-slate-950 border-2 border-amber-500 rounded-2xl p-4 transition flex items-center space-x-4 relative">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl font-bold">
-              <i class="fa-solid fa-user-shield"></i>
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl font-bold">
+              ⚖️
             </div>
             <div>
-              <h3 class="font-bold text-white text-base">Алишер Каримов</h3>
+              <h3 class="font-bold text-white text-base" id="karimovName">Алишер Каримов</h3>
               <p class="text-xs text-amber-400 font-medium" id="karimovRole">Адвокат по уголовным и гражданским делам</p>
             </div>
           </div>
 
-          <!-- АЗИМОВ -->
+          <!-- ИКРОМ АЗИМОВ -->
           <div id="cardAzimov" onclick="selectLawyer('azimov')" class="cursor-pointer bg-slate-950 border-2 border-slate-800 hover:border-slate-700 rounded-2xl p-4 transition flex items-center space-x-4 relative">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold">
-              <i class="fa-solid fa-scale-balanced"></i>
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl font-bold">
+              ⚖️
             </div>
             <div>
-              <h3 class="font-bold text-white text-base">Икром Азимов</h3>
+              <h3 class="font-bold text-white text-base" id="azimovName">Икром Азимов</h3>
               <p class="text-xs text-emerald-400 font-medium" id="azimovRole">Адвокат по экономическим и семейным спорам</p>
             </div>
           </div>
@@ -121,11 +121,10 @@
     <div class="text-xs text-slate-500" id="footerRights">
       © ADVOKATUZ • Все права защищены
     </div>
-    <!-- Скрытые ссылки на кабинеты -->
     <div class="flex space-x-4 justify-center text-[11px] text-slate-600">
-      <a href="/admin-karimov.html" class="hover:text-amber-400 transition" id="footerKarimov">Кабинет А. Каримова</a>
+      <a href="/admin.html" class="hover:text-amber-400 transition" id="footerKarimov">Офис Алишера Каримова</a>
       <span>•</span>
-      <a href="/admin-azimov.html" class="hover:text-emerald-400 transition" id="footerAzimov">Кабинет И. Азимова</a>
+      <a href="/ikrom.html" class="hover:text-emerald-400 transition" id="footerAzimov">Офис Икрома Азимова</a>
     </div>
   </footer>
 
@@ -141,7 +140,9 @@
         heroTitle: "Нужна помощь адвоката?",
         heroSubtitle: "Выберите адвоката и отправьте заявку. Мы свяжемся с вами в ближайшее время для консультации.",
         selectLawyerLabel: "Выберите адвоката:",
+        karimovName: "Алишер Каримов",
         karimovRole: "Адвокат по уголовным и гражданским делам",
+        azimovName: "Икром Азимов",
         azimovRole: "Адвокат по экономическим и семейным спорам",
         nameLabel: "Ваше имя",
         phoneLabel: "Номер телефона",
@@ -152,8 +153,8 @@
         successTitle: "Заявка успешно отправлена!",
         successText: "Адвокат свяжется с вами в ближайшее время.",
         footerRights: "© ADVOKATUZ • Все права защищены",
-        footerKarimov: "Кабинет А. Каримова",
-        footerAzimov: "Кабинет И. Азимова"
+        footerKarimov: "Офис Алишера Каримова",
+        footerAzimov: "Офис Икрома Азимова"
       },
       uz: {
         langBtn: "РУС",
@@ -162,7 +163,9 @@
         heroTitle: "Advokat yordami kerakmi?",
         heroSubtitle: "Advokatni tanlang va ariza yuboring. Maslahat uchun tez orada siz bilan bog'lanamiz.",
         selectLawyerLabel: "Advokatni tanlang:",
+        karimovName: "Alisher Karimov",
         karimovRole: "Jinoyat va fuqarolik ishlari bo'yicha advokat",
+        azimovName: "Ikrom Azimov",
         azimovRole: "Iqtisodiy va oilaviy nizolar bo'yicha advokat",
         nameLabel: "Ismingiz",
         phoneLabel: "Telefon raqamingiz",
@@ -173,8 +176,8 @@
         successTitle: "Ariza muvaffaqiyatli yuborildi!",
         successText: "Advokat tez orada siz bilan bog'lanadi.",
         footerRights: "© ADVOKATUZ • Barcha huquqlar himoyalangan",
-        footerKarimov: "A. Karimov kabineti",
-        footerAzimov: "I. Azimov kabineti"
+        footerKarimov: "Alisher Karimov ofisi",
+        footerAzimov: "Ikrom Azimov ofisi"
       }
     };
 
@@ -191,24 +194,22 @@
       document.getElementById('heroTitle').innerText = d.heroTitle;
       document.getElementById('heroSubtitle').innerText = d.heroSubtitle;
       document.getElementById('selectLawyerLabel').innerText = d.selectLawyerLabel;
+      document.getElementById('karimovName').innerText = d.karimovName;
       document.getElementById('karimovRole').innerText = d.karimovRole;
+      document.getElementById('azimovName').innerText = d.azimovName;
       document.getElementById('azimovRole').innerText = d.azimovRole;
       document.getElementById('nameLabel').innerText = d.nameLabel;
       document.getElementById('phoneLabel').innerText = d.phoneLabel;
       document.getElementById('descLabel').innerText = d.descLabel;
       
-      // Перевод подсказок в полях ввода (placeholder)
       document.getElementById('clientName').placeholder = d.namePlaceholder;
       document.getElementById('clientDesc').placeholder = d.descPlaceholder;
 
-      // Перевод кнопки
       document.getElementById('submitBtnText').innerText = d.submitBtn;
 
-      // Перевод сообщения об успехе
       document.getElementById('successTitle').innerText = d.successTitle;
       document.getElementById('successText').innerText = d.successText;
 
-      // Перевод футера
       document.getElementById('footerRights').innerText = d.footerRights;
       document.getElementById('footerKarimov').innerText = d.footerKarimov;
       document.getElementById('footerAzimov').innerText = d.footerAzimov;
