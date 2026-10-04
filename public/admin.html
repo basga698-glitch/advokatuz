@@ -3,223 +3,208 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Кабинет А. Каримова — ADVOKATUZ</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Офис Алишера Каримова</title>
+  <link rel="stylesheet" href="style.css">
   <script src="/socket.io/socket.io.js"></script>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --accent-color: #eab308; /* Желтый / Золотой */
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --border-color: #334155;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      font-size: 32px;
+      color: var(--accent-color);
+    }
+    .brand h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+    }
+    .tab-btn {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      color: var(--text-sub);
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--accent-color);
+      color: #000;
+      border-color: var(--accent-color);
+    }
+    .requests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: var(--accent-color);
+    }
+    .card p {
+      margin: 8px 0;
+      color: var(--text-sub);
+    }
+    .card p strong {
+      color: var(--text-main);
+    }
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-accept { background: #22c55e; color: #fff; }
+    .btn-archive { background: #eab308; color: #000; }
+    .btn-delete { background: #ef4444; color: #fff; }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between antialiased">
+<body>
 
-  <!-- ШАПКА -->
-  <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-black text-xl shadow-lg">
-          <i class="fa-solid fa-user-shield"></i>
-        </div>
-        <div>
-          <span class="text-xl font-black text-white tracking-widest uppercase block leading-none">ADVOKAT<span class="text-amber-400">UZ</span></span>
-          <span class="text-xs text-amber-400 font-semibold" id="cabinetOwner">Кабинет адвоката А. Каримова</span>
-        </div>
-      </div>
+  <header class="header">
+    <div class="brand">
+      <span class="brand-icon">⚖️</span>
+      <h1>Офис Алишера Каримова</h1>
+    </div>
 
-      <!-- КНОПКА СМЕНЫ ЯЗЫКА -->
-      <button onclick="toggleLang()" class="bg-slate-900 border border-slate-800 hover:border-slate-600 text-slate-300 font-bold px-3 py-1.5 rounded-xl text-xs transition flex items-center space-x-1">
-        <i class="fa-solid fa-globe text-amber-400"></i>
-        <span id="langBtnText">O'ZB</span>
-      </button>
+    <!-- Вкладки вместо старых надписей -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('active')">Новые и В работе</button>
+      <button class="tab-btn" onclick="switchTab('archive')">Архив</button>
     </div>
   </header>
 
-  <!-- КОНТЕНТ -->
-  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full space-y-6">
-
-    <!-- КАРТОЧКИ СТАТИСТИКИ -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
-        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-1" id="statTotalLabel">Всего заявок</span>
-        <span class="text-3xl font-black text-white" id="statTotal">0</span>
-      </div>
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
-        <span class="text-xs text-amber-400 font-semibold uppercase tracking-wider block mb-1" id="statNewLabel">Новые</span>
-        <span class="text-3xl font-black text-amber-400" id="statNew">0</span>
-      </div>
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
-        <span class="text-xs text-emerald-400 font-semibold uppercase tracking-wider block mb-1" id="statDoneLabel">Завершенные</span>
-        <span class="text-3xl font-black text-emerald-400" id="statDone">0</span>
-      </div>
+  <main>
+    <div id="requestsContainer" class="requests-grid">
+      <!-- Заявки подгружаются здесь -->
     </div>
-
-    <!-- ТАБЛИЦА ЗАЯВОК -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
-        <h2 class="font-bold text-white text-lg" id="tableTitle">Заявки клиентов</h2>
-        <span class="text-xs text-slate-500" id="autoUpdateText">Автообновление через Socket.io</span>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm text-slate-300">
-          <thead class="bg-slate-950 text-xs text-slate-400 uppercase tracking-wider border-b border-slate-800">
-            <tr>
-              <th class="p-4">ID</th>
-              <th class="p-4" id="thClient">Клиент</th>
-              <th class="p-4" id="thPhone">Телефон</th>
-              <th class="p-4" id="thDesc">Описание</th>
-              <th class="p-4" id="thStatus">Статус</th>
-              <th class="p-4" id="thDate">Дата</th>
-              <th class="p-4 text-right" id="thActions">Действия</th>
-            </tr>
-          </thead>
-          <tbody id="leadsTableBody" class="divide-y divide-slate-800/50">
-            <!-- Данные загружаются через JS -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
   </main>
 
   <script>
     const socket = io();
-    let currentLang = 'ru';
-    let allLeads = [];
+    let currentTab = 'active';
+    let allRequests = [];
 
-    const dict = {
-      ru: {
-        langBtn: "O'ZB",
-        cabinetOwner: "Кабинет адвоката А. Каримова",
-        statTotalLabel: "Всего заявок",
-        statNewLabel: "Новые",
-        statDoneLabel: "Завершенные",
-        tableTitle: "Заявки клиентов",
-        autoUpdateText: "Режим реального времени",
-        thClient: "Клиент",
-        thPhone: "Телефон",
-        thDesc: "Описание",
-        thStatus: "Статус",
-        thDate: "Дата",
-        thActions: "Действия",
-        statusNew: "Новая",
-        statusInWork: "В работе",
-        statusDone: "Завершено",
-        emptyTable: "Заявок пока нет"
-      },
-      uz: {
-        langBtn: "РУС",
-        cabinetOwner: "Advokat A. Karimov kabineti",
-        statTotalLabel: "Jami arizalar",
-        statNewLabel: "Yangilar",
-        statDoneLabel: "Yakunlangan",
-        tableTitle: "Mijozlar arizalari",
-        autoUpdateText: "Reallik rejimida yangilanish",
-        thClient: "Mijoz",
-        thPhone: "Telefon",
-        thDesc: "Tavsif",
-        thStatus: "Holat",
-        thDate: "Sana",
-        thActions: "Harakatlar",
-        statusNew: "Yangi",
-        statusInWork: "Jarayonda",
-        statusDone: "Yakunlandi",
-        emptyTable: "Arizalar hali yo'q"
-      }
-    };
-
-    function toggleLang() {
-      currentLang = currentLang === 'ru' ? 'uz' : 'ru';
-      applyLang();
-      renderLeads();
+    // Загрузка заявок Алишера Каримова (lawyer_id = karimov или 1)
+    function fetchRequests() {
+      fetch('/api/requests?lawyer=karimov')
+        .then(res => res.json())
+        .then(data => {
+          allRequests = data;
+          renderRequests();
+        });
     }
 
-    function applyLang() {
-      const d = dict[currentLang];
-      document.getElementById('langBtnText').innerText = d.langBtn;
-      document.getElementById('cabinetOwner').innerText = d.cabinetOwner;
-      document.getElementById('statTotalLabel').innerText = d.statTotalLabel;
-      document.getElementById('statNewLabel').innerText = d.statNewLabel;
-      document.getElementById('statDoneLabel').innerText = d.statDoneLabel;
-      document.getElementById('tableTitle').innerText = d.tableTitle;
-      document.getElementById('autoUpdateText').innerText = d.autoUpdateText;
-      document.getElementById('thClient').innerText = d.thClient;
-      document.getElementById('thPhone').innerText = d.thPhone;
-      document.getElementById('thDesc').innerText = d.thDesc;
-      document.getElementById('thStatus').innerText = d.thStatus;
-      document.getElementById('thDate').innerText = d.thDate;
-      document.getElementById('thActions').innerText = d.thActions;
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderRequests();
     }
 
-    async function loadLeads() {
-      try {
-        const res = await fetch('/api/leads');
-        const data = await res.json();
-        // Фильтруем заявки адресованные Каримову или без указания ID
-        allLeads = data.filter(lead => lead.description.includes('[ID:karimov]') || !lead.description.includes('[ID:'));
-        renderLeads();
-      } catch (err) {
-        console.error(err);
-      }
-    }
+    function renderRequests() {
+      const container = document.getElementById('requestsContainer');
+      container.innerHTML = '';
 
-    function renderLeads() {
-      const tbody = document.getElementById('leadsTableBody');
-      tbody.innerHTML = '';
-
-      const d = dict[currentLang];
-
-      let countNew = 0;
-      let countDone = 0;
-
-      if (allLeads.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-slate-500">${d.emptyTable}</td></tr>`;
-      }
-
-      allLeads.forEach(lead => {
-        if (lead.status === 'new') countNew++;
-        if (lead.status === 'done') countDone++;
-
-        const cleanDesc = lead.description.replace(/\[ID:.*?\]/g, '').trim();
-        const dateStr = new Date(lead.created_at).toLocaleString();
-
-        let statusBadge = '';
-        if (lead.status === 'new') statusBadge = `<span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-1 rounded-md text-xs font-semibold">${d.statusNew}</span>`;
-        else if (lead.status === 'in_progress') statusBadge = `<span class="bg-blue-500/10 text-blue-400 border border-blue-500/30 px-2 py-1 rounded-md text-xs font-semibold">${d.statusInWork}</span>`;
-        else statusBadge = `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-1 rounded-md text-xs font-semibold">${d.statusDone}</span>`;
-
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-900/50 transition';
-        tr.innerHTML = `
-          <td class="p-4 font-mono text-slate-500">#${lead.id}</td>
-          <td class="p-4 font-bold text-white">${lead.client_name}</td>
-          <td class="p-4 text-amber-400 font-mono">${lead.client_phone}</td>
-          <td class="p-4 max-w-xs truncate">${cleanDesc || '-'}</td>
-          <td class="p-4">${statusBadge}</td>
-          <td class="p-4 text-xs text-slate-500">${dateStr}</td>
-          <td class="p-4 text-right space-x-2">
-            <button onclick="updateStatus(${lead.id}, 'in_progress')" class="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1.5 rounded-lg transition"><i class="fa-solid fa-clock text-amber-400"></i></button>
-            <button onclick="updateStatus(${lead.id}, 'done')" class="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1.5 rounded-lg transition"><i class="fa-solid fa-check text-emerald-400"></i></button>
-          </td>
-        `;
-        tbody.appendChild(tr);
+      const filtered = allRequests.filter(req => {
+        if (currentTab === 'active') return req.status !== 'archived';
+        return req.status === 'archived';
       });
 
-      document.getElementById('statTotal').innerText = allLeads.length;
-      document.getElementById('statNew').innerText = countNew;
-      document.getElementById('statDone').innerText = countDone;
+      if (filtered.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-sub);">Заявок пока нет.</p>';
+        return;
+      }
+
+      filtered.forEach(req => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        let buttons = '';
+        if (currentTab === 'active') {
+          buttons = `
+            <button class="btn btn-accept" onclick="updateStatus(${req.id}, 'in_progress')">Принять</button>
+            <button class="btn btn-archive" onclick="updateStatus(${req.id}, 'archived')">В архив</button>
+          `;
+        } else {
+          buttons = `
+            <button class="btn btn-delete" onclick="deleteRequest(${req.id})">Удалить из архива</button>
+          `;
+        }
+
+        card.innerHTML = `
+          <h3>Заявка #${req.id}</h3>
+          <p><strong>Клиент:</strong> ${req.name || 'Не указано'}</p>
+          <p><strong>Телефон:</strong> ${req.phone || 'Не указан'}</p>
+          <p><strong>Описание:</strong> ${req.message || 'Без описания'}</p>
+          <p><strong>Дата:</strong> ${req.created_at || 'Сегодня'}</p>
+          <div class="card-actions">${buttons}</div>
+        `;
+        container.appendChild(card);
+      });
     }
 
-    async function updateStatus(id, status) {
-      await fetch(`/api/leads/${id}`, {
-        method: 'PATCH',
+    function updateStatus(id, status) {
+      fetch(`/api/requests/${id}/status`, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
-      });
-      loadLeads();
+      }).then(() => fetchRequests());
     }
 
-    socket.on('new_lead', () => loadLeads());
-    socket.on('update_lead', () => loadLeads());
+    function deleteRequest(id) {
+      fetch(`/api/requests/${id}`, { method: 'DELETE' })
+        .then(() => fetchRequests());
+    }
 
-    loadLeads();
+    socket.on('newRequest', () => fetchRequests());
+    fetchRequests();
   </script>
 </body>
 </html>
