@@ -2,209 +2,378 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Офис Икрома Азимова</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Адвокат Икром Азимов — advokatuz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="/socket.io/socket.io.js"></script>
   <style>
-    :root {
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
-      --accent-color: #eab308; /* Желтый / Золотой */
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-      --border-color: #334155;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      margin: 0;
-      padding: 20px;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 15px;
-      margin-bottom: 25px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .brand-icon {
-      font-size: 32px;
-      color: var(--accent-color);
-    }
-    .brand h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    .nav-tabs {
-      display: flex;
-      gap: 10px;
-    }
-    .tab-btn {
-      background: #0f172a;
-      border: 1px solid var(--border-color);
-      color: var(--text-sub);
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s;
-    }
-    .tab-btn.active {
-      background: var(--accent-color);
-      color: #000;
-      border-color: var(--accent-color);
-    }
-    .requests-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-    .card h3 {
-      margin-top: 0;
-      color: var(--accent-color);
-    }
-    .card p {
-      margin: 8px 0;
-      color: var(--text-sub);
-    }
-    .card p strong {
-      color: var(--text-main);
-    }
-    .card-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-    .btn {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .btn:hover { opacity: 0.85; }
-    .btn-accept { background: #22c55e; color: #fff; }
-    .btn-archive { background: #eab308; color: #000; }
-    .btn-delete { background: #ef4444; color: #fff; }
+    body { background-color: #080f0e; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; }
+    .card-bg-ikrom { background-color: #14170e; border: 1px solid #2e2a16; }
+    .card-bg-ikrom:hover { border-color: #f59e0b; }
+    .btn-amber { background-color: #d97706; color: #ffffff; }
+    .btn-amber:hover { background-color: #f59e0b; }
+    .btn-outline-amber { background-color: transparent; border: 1px solid #2e2a16; color: #cbd5e1; }
+    .btn-outline-amber:hover { border-color: #b45309; color: #ffffff; }
   </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between antialiased">
 
-  <header class="header">
-    <div class="brand">
-      <span class="brand-icon">⚖️</span>
-      <h1>Офис Икрома Азимова</h1>
-    </div>
+  <!-- ШАПКА / NAVIGATION -->
+  <header class="border-b border-amber-950/80 bg-[#080f0e]/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      
+      <!-- ЛОГОТИП -->
+      <a href="/index.html" class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-600/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl shadow-lg">⚖</div>
+        <div>
+          <span class="text-xl font-bold text-white tracking-tight block leading-none">advokat<span class="text-amber-400">uz</span></span>
+          <span class="text-[10px] text-amber-500 uppercase tracking-wider font-semibold block mt-1" id="headerTag">ПЕРСОНАЛЬНАЯ СТРАНИЦА АДВОКАТА</span>
+        </div>
+      </a>
 
-    <!-- Вкладки вместо старых надписей -->
-    <div class="nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('active')">Новые и В работе</button>
-      <button class="tab-btn" onclick="switchTab('archive')">Архив</button>
+      <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА -->
+      <div class="bg-[#14170e] border border-[#2e2a16] rounded-xl p-1 flex text-xs font-bold">
+        <button id="langRuBtn" onclick="setLang('ru')" class="px-3 py-1 rounded-lg bg-amber-600 text-white transition">RU</button>
+        <button id="langUzBtn" onclick="setLang('uz')" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition">UZ</button>
+      </div>
+
     </div>
   </header>
 
-  <main>
-    <div id="requestsContainer" class="requests-grid">
-      <!-- Заявки подгружаются здесь -->
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="max-w-3xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
+
+    <!-- КАРТОЧКА АДВОКАТА ИКРОМА АЗИМОВА -->
+    <div class="card-bg-ikrom rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" alt="Икром Азимов" class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl object-cover object-[center_20%] border-2 border-amber-500/40 shadow-lg flex-shrink-0">
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-center sm:justify-start space-x-1.5 text-xs text-amber-400 font-semibold uppercase tracking-wider">
+              <i class="fa-solid fa-location-dot text-[10px]"></i>
+              <span id="azimovCity">ТАШКЕНТ</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-white font-serif" id="azimovName">Икром Азимов</h1>
+            <p class="text-xs sm:text-sm text-slate-400 font-medium" id="azimovMeta">39 лет • <span class="text-amber-400 font-bold">14 лет стажа</span></p>
+          </div>
+        </div>
+
+        <div class="bg-[#0c0f0a] border border-[#2e2a16] rounded-xl px-4 py-3 flex items-center justify-between text-xs">
+          <span class="text-slate-400" id="azimovLicLabel">Лицензия №</span>
+          <span class="text-slate-200 font-mono font-bold text-sm">UZ-12855</span>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs font-semibold">
+            <span class="text-slate-300" id="azimovWinLabel">Выигранные дела</span>
+            <span class="text-amber-400 font-bold">91%</span>
+          </div>
+          <div class="w-full bg-[#0c0f0a] h-2.5 rounded-full overflow-hidden border border-[#2e2a16]">
+            <div class="bg-amber-500 h-full rounded-full" style="width: 91%;"></div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-2">
+          <span class="bg-[#0c0f0a] border border-[#2e2a16] text-slate-300 text-xs px-3 py-1.5 rounded-xl" id="aTag1">Гражданские дела</span>
+          <span class="bg-[#0c0f0a] border border-[#2e2a16] text-slate-300 text-xs px-3 py-1.5 rounded-xl" id="aTag2">Семейные споры</span>
+          <span class="bg-[#0c0f0a] border border-[#2e2a16] text-slate-300 text-xs px-3 py-1.5 rounded-xl" id="aTag3">Арбитраж</span>
+        </div>
+      </div>
+
+      <!-- КНОПКА ПОДРОБНЕЕ -->
+      <div class="pt-4 border-t border-[#2e2a16]">
+        <button onclick="openDetailsModal()" class="w-full btn-amber font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2" id="aMoreBtn">
+          <span>Подробнее</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+      </div>
     </div>
+
+    <!-- БЛОК ОФИСА ИКРОМА АЗИМОВА -->
+    <div class="card-bg-ikrom rounded-3xl p-6 space-y-4 shadow-xl">
+      <h3 class="text-lg font-bold text-white font-serif flex items-center space-x-2">
+        <i class="fa-solid fa-building text-amber-400"></i>
+        <span id="officeTitleIkrom" class="text-amber-300">Офис адвоката Икрома Азимова</span>
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        <div>
+          <span class="text-amber-400/80 block font-semibold uppercase text-[10px]" id="officeAddrLabelIkrom">Адрес офиса:</span>
+          <span class="text-slate-200 font-medium" id="officeAddrTextIkrom">г. Ташкент, Шайхантахурский р-н, ул. Навои, 14</span>
+        </div>
+        <div>
+          <span class="text-amber-400/80 block font-semibold uppercase text-[10px]" id="officeHoursLabelIkrom">Режим работы:</span>
+          <span class="text-slate-200 font-medium" id="officeHoursTextIkrom">Пн-Пт: 09:00 - 18:00 (Сб-Вс — по записи)</span>
+        </div>
+      </div>
+    </div>
+
   </main>
+
+  <!-- ФУТЕР -->
+  <footer class="border-t border-amber-950/60 bg-[#080f0e] py-6 text-center">
+    <div class="text-xs text-slate-400 font-medium tracking-wide" id="footerRights">
+      © ADVOKATUZ • Все права защищены
+    </div>
+  </footer>
+
+  <!-- МОДАЛЬНОЕ ОКНО С ИНФОРМАЦИЕЙ И ФОРМОЙ ЗАПИСИ -->
+  <div id="lawyerModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="bg-[#14170e] border border-[#2e2a16] rounded-3xl max-w-lg w-full overflow-hidden relative shadow-2xl my-8">
+      
+      <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/90 transition backdrop-blur-md">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- ЭКРАН 1: ПОДРОБНОСТИ -->
+      <div id="detailsView" class="space-y-5 pb-6">
+        <div class="relative h-56 sm:h-64 w-full overflow-hidden bg-slate-900">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800" alt="Икром Азимов" class="w-full h-full object-cover object-[center_20%]">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#14170e] via-[#14170e]/30 to-transparent"></div>
+          <div class="absolute bottom-3 left-6 right-6">
+            <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest block mb-0.5" id="modalCityTag">ТАШКЕНТ</span>
+            <h3 class="text-2xl font-bold text-white font-serif" id="modalName">Икром Азимов</h3>
+            <p class="text-xs text-slate-300 mt-0.5" id="modalSubtitle">Лицензия № UZ-12855</p>
+          </div>
+        </div>
+
+        <div class="px-6 space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-[#0c0f0a] border border-[#2e2a16] rounded-2xl p-3 flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-sm"><i class="fa-solid fa-star"></i></div>
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase font-bold" id="ratingLabel">Рейтинг</span>
+                <span class="text-sm font-bold text-white">4.8 ★</span>
+              </div>
+            </div>
+
+            <div class="bg-[#0c0f0a] border border-[#2e2a16] rounded-2xl p-3 flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-sm"><i class="fa-solid fa-award"></i></div>
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase font-bold" id="experienceLabel">Опыт работы</span>
+                <span class="text-sm font-bold text-white" id="modalExp">14 лет</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#0c0f0a] border border-[#2e2a16] rounded-2xl p-4 space-y-2">
+            <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2">
+              <i class="fa-solid fa-user-shield"></i>
+              <span id="modalSpecTitle">О квалификации и практике</span>
+            </h4>
+            <p class="text-xs text-slate-300 leading-relaxed" id="modalDescription">
+              Опытный специалист в области гражданского права, имущественных и семейных споров, а также коммерческого арбитража.
+            </p>
+          </div>
+        </div>
+
+        <div class="px-6 pt-2">
+          <button onclick="showBookingForm()" class="w-full btn-amber font-bold py-3.5 rounded-xl text-xs sm:text-sm uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+            <i class="fa-regular fa-calendar-check text-base"></i>
+            <span id="modalBookBtnText">Записаться на консультацию</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ЭКРАН 2: ФОРМА ЗАПИСИ -->
+      <div id="bookingFormView" class="p-6 sm:p-8 space-y-6 hidden">
+        <div class="space-y-1">
+          <button onclick="showDetailsView()" class="text-xs text-amber-400 font-semibold hover:underline flex items-center space-x-1 mb-2">
+            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            <span id="backToDetailsText">Назад к информации</span>
+          </button>
+          <h3 class="text-xl font-bold text-white font-serif" id="formModalTitle">Запись на консультацию</h3>
+          <p class="text-xs text-amber-400 font-semibold" id="selectedLawyerDisplay">Адвокат: Икром Азимов</p>
+        </div>
+
+        <form id="leadForm" onsubmit="submitForm(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="nameLabel">Ваше имя</label>
+            <input type="text" id="clientName" required placeholder="Иван Иванов" class="w-full bg-[#0c0f0a] border border-[#2e2a16] focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="phoneLabel">Номер телефона</label>
+            <input type="tel" id="clientPhone" required placeholder="+998 90 123 45 67" class="w-full bg-[#0c0f0a] border border-[#2e2a16] focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="descLabel">Кратко опишите проблему</label>
+            <textarea id="clientDesc" rows="3" placeholder="Опишите ситуацию..." class="w-full bg-[#0c0f0a] border border-[#2e2a16] focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full btn-amber font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span id="submitBtnText">Отправить анкету</span>
+          </button>
+        </form>
+
+        <div id="successMessage" class="hidden bg-amber-950/80 border border-amber-500/40 rounded-2xl p-6 text-center space-y-2">
+          <i class="fa-solid fa-circle-check text-amber-400 text-4xl block mb-2"></i>
+          <h3 class="text-lg font-bold text-white" id="successTitle">Заявка успешно отправлена!</h3>
+          <p class="text-xs text-amber-300" id="successText">Адвокат свяжется с вами в ближайшее время.</p>
+          <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-amber-600 text-white rounded-xl text-xs font-bold">Закрыть</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <script>
     const socket = io();
-    let currentTab = 'active';
-    let allRequests = [];
+    let currentLang = 'ru';
 
-    // Загрузка заявок Икрома Азимова (lawyer_id = ikrom или 2)
-    function fetchRequests() {
-      fetch('/api/requests?lawyer=ikrom')
-        .then(res => res.json())
-        .then(data => {
-          allRequests = data;
-          renderRequests();
-        });
-    }
-
-    function switchTab(tab) {
-      currentTab = tab;
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderRequests();
-    }
-
-    function renderRequests() {
-      const container = document.getElementById('requestsContainer');
-      container.innerHTML = '';
-
-      const filtered = allRequests.filter(req => {
-        if (currentTab === 'active') return req.status !== 'archived';
-        return req.status === 'archived';
-      });
-
-      if (filtered.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-sub);">Заявок пока нет.</p>';
-        return;
+    const ikromData = {
+      ru: {
+        name: "Икром Азимов",
+        subtitle: "Лицензия № UZ-12855",
+        description: "Опытный специалист в области гражданского права, имущественных и семейных споров, а также коммерческого арбитража.",
+        exp: "14 лет",
+        officeTitle: "Офис адвоката Икрома Азимова",
+        officeAddr: "г. Ташкент, Шайхантахурский р-н, ул. Навои, 14",
+        officeHours: "Пн-Пт: 09:00 - 18:00 (Сб-Вс — по записи)"
+      },
+      uz: {
+        name: "Ikrom Azimov",
+        subtitle: "Litsenziya № UZ-12855",
+        description: "Fuqarolik huquqi, mulkiy va oilaviy nizolar hamda tijorat arbitraji sohasidagi tajribali mutaxassis.",
+        exp: "14 yil",
+        officeTitle: "Advokat Ikrom Azimov idorasi",
+        officeAddr: "Toshkent sh., Shayxontohur t., Navoiy ko'chasi, 14",
+        officeHours: "Dush-Juma: 09:00 - 18:00 (Shanba-Yakshanba — yozuv bo'yicha)"
       }
+    };
 
-      filtered.forEach(req => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        
-        let buttons = '';
-        if (currentTab === 'active') {
-          buttons = `
-            <button class="btn btn-accept" onclick="updateStatus(${req.id}, 'in_progress')">Принять</button>
-            <button class="btn btn-archive" onclick="updateStatus(${req.id}, 'archived')">В архив</button>
-          `;
-        } else {
-          buttons = `
-            <button class="btn btn-delete" onclick="deleteRequest(${req.id})">Удалить из архива</button>
-          `;
+    const dict = {
+      ru: {
+        headerTag: "ПЕРСОНАЛЬНАЯ СТРАНИЦА АДВОКАТА",
+        city: "ТАШКЕНТ",
+        azimovMeta: "39 лет • <span class=\"text-amber-400 font-bold\">14 лет стажа</span>",
+        licLabel: "Лицензия №", winLabel: "Выигранные дела",
+        aTag1: "Гражданские дела", aTag2: "Семейные споры", aTag3: "Арбитраж",
+        moreBtn: "Подробнее",
+        ratingLabel: "Рейтинг", experienceLabel: "Опыт работы", modalSpecTitle: "О квалификации и практике",
+        modalBookBtnText: "Записаться на консультацию", backToDetailsText: "Назад к информации",
+        formModalTitle: "Запись на консультацию", selectedLawyerPrefix: "Адвокат: ",
+        nameLabel: "Ваше имя", phoneLabel: "Номер телефона", descLabel: "Кратко опишите проблему",
+        namePlaceholder: "Иван Иванов", descPlaceholder: "Опишите ситуацию...", submitBtn: "Отправить анкету",
+        successTitle: "Заявка успешно отправлена!", successText: "Адвокат свяжется с вами в ближайшее время.",
+        footerRights: "© ADVOKATUZ • Все права защищены"
+      },
+      uz: {
+        headerTag: "ADVOKATNING SHAXSIY SAHIFASI",
+        city: "TOSHKENT",
+        azimovMeta: "39 yosh • <span class=\"text-amber-400 font-bold\">14 yil staj</span>",
+        licLabel: "Litsenziya №", winLabel: "Yutuqlar",
+        aTag1: "Fuqarolik ishlari", aTag2: "Oilaviy nizolar", aTag3: "Arbitraj",
+        moreBtn: "Batafsil",
+        ratingLabel: "Reyting", experienceLabel: "Ish staji", modalSpecTitle: "Malaka va amaliyot haqida",
+        modalBookBtnText: "Konsultatsiyaga yozilish", backToDetailsText: "Ma'lumotlarga qaytish",
+        formModalTitle: "Konsultatsiyaga yozilish", selectedLawyerPrefix: "Advokat: ",
+        nameLabel: "Ismingiz", phoneLabel: "Telefon raqamingiz", descLabel: "Muammoingizni qisqacha tasvirlang",
+        namePlaceholder: "Eshmat Eshmatov", descPlaceholder: "Vaziyatni tasvirlab bering...", submitBtn: "Arizani yuborish",
+        successTitle: "Ariza muvaffaqiyatli yuborildi!", successText: "Advokat tez orada siz bilan bog'lanadi.",
+        footerRights: "© ADVOKATUZ • Barcha huquqlar himoyalangan"
+      }
+    };
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('langRuBtn').className = (lang === 'ru') ? "px-3 py-1 rounded-lg bg-amber-600 text-white transition" : "px-3 py-1 rounded-lg text-slate-400 hover:text-white transition";
+      document.getElementById('langUzBtn').className = (lang === 'uz') ? "px-3 py-1 rounded-lg bg-amber-600 text-white transition" : "px-3 py-1 rounded-lg text-slate-400 hover:text-white transition";
+      applyLang();
+    }
+
+    function applyLang() {
+      const d = dict[currentLang];
+      const ikrom = ikromData[currentLang];
+
+      document.getElementById('headerTag').innerText = d.headerTag;
+      document.getElementById('azimovCity').innerText = d.city;
+      document.getElementById('azimovName').innerText = ikrom.name;
+      document.getElementById('azimovMeta').innerHTML = d.azimovMeta;
+      document.getElementById('azimovLicLabel').innerText = d.licLabel;
+      document.getElementById('azimovWinLabel').innerText = d.winLabel;
+
+      document.getElementById('aTag1').innerText = d.aTag1;
+      document.getElementById('aTag2').innerText = d.aTag2;
+      document.getElementById('aTag3').innerText = d.aTag3;
+
+      document.getElementById('aMoreBtn').querySelector('span').innerText = d.moreBtn;
+
+      document.getElementById('officeTitleIkrom').innerText = ikrom.officeTitle;
+      document.getElementById('officeAddrTextIkrom').innerText = ikrom.officeAddr;
+      document.getElementById('officeHoursTextIkrom').innerText = ikrom.officeHours;
+
+      document.getElementById('modalCityTag').innerText = d.city;
+      document.getElementById('modalName').innerText = ikrom.name;
+      document.getElementById('modalSubtitle').innerText = ikrom.subtitle;
+      document.getElementById('modalDescription').innerText = ikrom.description;
+      document.getElementById('modalExp').innerText = ikrom.exp;
+
+      document.getElementById('ratingLabel').innerText = d.ratingLabel;
+      document.getElementById('experienceLabel').innerText = d.experienceLabel;
+      document.getElementById('modalSpecTitle').innerText = d.modalSpecTitle;
+      document.getElementById('modalBookBtnText').innerText = d.modalBookBtnText;
+      document.getElementById('backToDetailsText').innerText = d.backToDetailsText;
+      document.getElementById('formModalTitle').innerText = d.formModalTitle;
+      document.getElementById('selectedLawyerDisplay').innerText = `${d.selectedLawyerPrefix}${ikrom.name}`;
+      document.getElementById('nameLabel').innerText = d.nameLabel;
+      document.getElementById('phoneLabel').innerText = d.phoneLabel;
+      document.getElementById('descLabel').innerText = d.descLabel;
+      document.getElementById('clientName').placeholder = d.namePlaceholder;
+      document.getElementById('clientDesc').placeholder = d.descPlaceholder;
+      document.getElementById('submitBtnText').innerText = d.submitBtn;
+
+      document.getElementById('successTitle').innerText = d.successTitle;
+      document.getElementById('successText').innerText = d.successText;
+      document.getElementById('footerRights').innerText = d.footerRights;
+    }
+
+    function openDetailsModal() {
+      showDetailsView();
+      document.getElementById('lawyerModal').classList.remove('hidden');
+    }
+
+    function showDetailsView() {
+      document.getElementById('detailsView').classList.remove('hidden');
+      document.getElementById('bookingFormView').classList.add('hidden');
+    }
+
+    function showBookingForm() {
+      document.getElementById('detailsView').classList.add('hidden');
+      document.getElementById('bookingFormView').classList.remove('hidden');
+      document.getElementById('leadForm').classList.remove('hidden');
+      document.getElementById('successMessage').classList.add('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('lawyerModal').classList.add('hidden');
+    }
+
+    async function submitForm(e) {
+      e.preventDefault();
+      const name = document.getElementById('clientName').value;
+      const phone = document.getElementById('clientPhone').value;
+      const desc = document.getElementById('clientDesc').value;
+
+      const fullDesc = `${desc} [ID:ikrom]`;
+
+      try {
+        const res = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ client_name: name, client_phone: phone, description: fullDesc })
+        });
+
+        if (res.ok) {
+          document.getElementById('leadForm').classList.add('hidden');
+          document.getElementById('successMessage').classList.remove('hidden');
         }
-
-        card.innerHTML = `
-          <h3>Заявка #${req.id}</h3>
-          <p><strong>Клиент:</strong> ${req.name || 'Не указано'}</p>
-          <p><strong>Телефон:</strong> ${req.phone || 'Не указан'}</p>
-          <p><strong>Описание:</strong> ${req.message || 'Без описания'}</p>
-          <p><strong>Дата:</strong> ${req.created_at || 'Сегодня'}</p>
-          <div class="card-actions">${buttons}</div>
-        `;
-        container.appendChild(card);
-      });
+      } catch (err) {
+        console.error('Ошибка отправки:', err);
+      }
     }
-
-    function updateStatus(id, status) {
-      fetch(`/api/requests/${id}/status`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status })
-      }).then(() => fetchRequests());
-    }
-
-    function deleteRequest(id) {
-      fetch(`/api/requests/${id}`, { method: 'DELETE' })
-        .then(() => fetchRequests());
-    }
-
-    socket.on('newRequest', () => fetchRequests());
-    fetchRequests();
   </script>
 </body>
 </html>
