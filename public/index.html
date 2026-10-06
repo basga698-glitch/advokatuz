@@ -20,9 +20,6 @@
     .card-bg:hover {
       border-color: #10b981;
     }
-    .accent-green {
-      color: #10b981;
-    }
     .btn-emerald {
       background-color: #059669;
       color: #ffffff;
@@ -103,9 +100,7 @@
         <div class="space-y-4">
           <!-- ФОТО И ОСНОВНЫЕ ДАННЫЕ -->
           <div class="flex items-start space-x-4">
-            <div class="w-20 h-20 rounded-2xl bg-slate-800 border-2 border-emerald-500/40 overflow-hidden flex-shrink-0 flex items-center justify-center text-3xl text-emerald-400 font-bold">
-              👤
-            </div>
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=250" alt="Алишер Каримов" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500/40 shadow-md flex-shrink-0">
             <div class="space-y-1">
               <div class="flex items-center space-x-1.5 text-xs text-emerald-400 font-semibold uppercase tracking-wider">
                 <i class="fa-solid fa-location-dot text-[10px]"></i>
@@ -153,9 +148,7 @@
         <div class="space-y-4">
           <!-- ФОТО И ОСНОВНЫЕ ДАННЫЕ -->
           <div class="flex items-start space-x-4">
-            <div class="w-20 h-20 rounded-2xl bg-slate-800 border-2 border-emerald-500/40 overflow-hidden flex-shrink-0 flex items-center justify-center text-3xl text-emerald-400 font-bold">
-              👤
-            </div>
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=250" alt="Икром Азимов" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500/40 shadow-md flex-shrink-0">
             <div class="space-y-1">
               <div class="flex items-center space-x-1.5 text-xs text-emerald-400 font-semibold uppercase tracking-wider">
                 <i class="fa-solid fa-location-dot text-[10px]"></i>
@@ -202,19 +195,14 @@
 
   </main>
 
-  <!-- ФУТЕР -->
-  <footer class="border-t border-emerald-950/60 bg-[#080f0e] py-6 text-center space-y-3">
-    <div class="text-xs text-slate-500" id="footerRights">
+  <!-- ФУТЕР (Убраны ссылки на офисы) -->
+  <footer class="border-t border-emerald-950/60 bg-[#080f0e] py-6 text-center">
+    <div class="text-xs text-slate-400 font-medium tracking-wide" id="footerRights">
       © ADVOKATUZ • Все права защищены
-    </div>
-    <div class="flex space-x-4 justify-center text-[11px] text-slate-600">
-      <a href="/admin.html" class="hover:text-emerald-400 transition" id="footerKarimov">Офис Алишера Каримова</a>
-      <span>•</span>
-      <a href="/ikrom.html" class="hover:text-emerald-400 transition" id="footerAzimov">Офис Икрома Азимова</a>
     </div>
   </footer>
 
-  <!-- МОДАЛЬНОЕ ОКНО АНКЕТЫ ЗАПИСИ (Изначально скрыто) -->
+  <!-- МОДАЛЬНОЕ ОКНО АНКЕТЫ ЗАПИСИ -->
   <div id="bookingModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-[#0d1a18] border border-[#162e2a] rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-6 relative shadow-2xl">
       
@@ -248,7 +236,7 @@
 
         <button type="submit" class="w-full btn-emerald font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider transition shadow-lg shadow-emerald-950/50 flex items-center justify-center space-x-2">
           <i class="fa-solid fa-paper-plane"></i>
-          <span id="submitBtnText">Отправить анкета</span>
+          <span id="submitBtnText">Отправить анкету</span>
         </button>
       </form>
 
@@ -300,9 +288,7 @@
         submitBtn: "Отправить анкету",
         successTitle: "Заявка успешно отправлена!",
         successText: "Адвокат свяжется с вами в ближайшее время.",
-        footerRights: "© ADVOKATUZ • Все права защищены",
-        footerKarimov: "Офис Алишера Каримова",
-        footerAzimov: "Офис Икрома Азимова"
+        footerRights: "© ADVOKATUZ • Все права защищены"
       },
       uz: {
         headerTag: "ADVOKATLAR YAGONA REESTRI",
@@ -331,9 +317,7 @@
         submitBtn: "Arizani yuborish",
         successTitle: "Ariza muvaffaqiyatli yuborildi!",
         successText: "Advokat tez orada siz bilan bog'lanadi.",
-        footerRights: "© ADVOKATUZ • Barcha huquqlar himoyalangan",
-        footerKarimov: "Alisher Karimov ofisi",
-        footerAzimov: "Ikrom Azimov ofisi"
+        footerRights: "© ADVOKATUZ • Barcha huquqlar himoyalangan"
       }
     };
 
@@ -396,8 +380,6 @@
       document.getElementById('successTitle').innerText = d.successTitle;
       document.getElementById('successText').innerText = d.successText;
       document.getElementById('footerRights').innerText = d.footerRights;
-      document.getElementById('footerKarimov').innerText = d.footerKarimov;
-      document.getElementById('footerAzimov').innerText = d.footerAzimov;
 
       updateSelectedLawyerDisplay();
     }
