@@ -55,19 +55,10 @@
         </div>
       </div>
 
-      <!-- КНОПКИ СПРАВА -->
-      <div class="flex items-center space-x-4">
-        <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА -->
-        <div class="bg-[#0d1a18] border border-[#162e2a] rounded-xl p-1 flex text-xs font-bold">
-          <button id="langRuBtn" onclick="setLang('ru')" class="px-3 py-1 rounded-lg bg-emerald-600 text-white transition">RU</button>
-          <button id="langUzBtn" onclick="setLang('uz')" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition">UZ</button>
-        </div>
-
-        <!-- КНОПКА ЗАПИСАТЬСЯ В ШАПКЕ -->
-        <button onclick="openModal('karimov')" class="btn-emerald font-bold px-4 py-2 rounded-xl text-xs sm:text-sm transition flex items-center space-x-2 shadow-lg shadow-emerald-950/50">
-          <i class="fa-regular fa-calendar-check"></i>
-          <span id="navBookBtn">Записаться</span>
-        </button>
+      <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА -->
+      <div class="bg-[#0d1a18] border border-[#162e2a] rounded-xl p-1 flex text-xs font-bold">
+        <button id="langRuBtn" onclick="setLang('ru')" class="px-3 py-1 rounded-lg bg-emerald-600 text-white transition">RU</button>
+        <button id="langUzBtn" onclick="setLang('uz')" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition">UZ</button>
       </div>
 
     </div>
@@ -98,7 +89,6 @@
       <!-- КАРТОЧКА: АЛИШЕР КАРИМОВ -->
       <div class="card-bg rounded-2xl p-6 transition duration-300 flex flex-col justify-between space-y-6">
         <div class="space-y-4">
-          <!-- ФОТО И ОСНОВНЫЕ ДАННЫЕ -->
           <div class="flex items-start space-x-4">
             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=250" alt="Алишер Каримов" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500/40 shadow-md flex-shrink-0">
             <div class="space-y-1">
@@ -111,13 +101,11 @@
             </div>
           </div>
 
-          <!-- ЛИЦЕНЗИЯ -->
           <div class="bg-[#080f0e] border border-[#162e2a] rounded-xl px-4 py-2 flex items-center justify-between text-xs">
             <span class="text-slate-400" id="karimovLicLabel">Лицензия №</span>
             <span class="text-slate-200 font-mono font-bold">UZ-16929</span>
           </div>
 
-          <!-- ВЫИГРАННЫЕ ДЕЛА -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-xs font-semibold">
               <span class="text-slate-300" id="karimovWinLabel">Выигранные дела / Yutuqlar</span>
@@ -128,7 +116,6 @@
             </div>
           </div>
 
-          <!-- ТЕГИ СПЕЦИАЛИЗАЦИИ -->
           <div class="flex flex-wrap gap-2 pt-2">
             <span class="bg-[#080f0e] border border-[#162e2a] text-slate-300 text-[11px] px-3 py-1.5 rounded-xl" id="kTag1">Уголовные дела</span>
             <span class="bg-[#080f0e] border border-[#162e2a] text-slate-300 text-[11px] px-3 py-1.5 rounded-xl" id="kTag2">Защита бизнеса</span>
@@ -136,17 +123,18 @@
           </div>
         </div>
 
-        <!-- КНОПКИ ДЕЙСТВИЯ -->
-        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-[#162e2a]">
-          <button onclick="openModal('karimov')" class="btn-outline font-bold py-2.5 rounded-xl text-xs transition" id="kMoreBtn">Подробнее</button>
-          <button onclick="openModal('karimov')" class="btn-emerald font-bold py-2.5 rounded-xl text-xs transition" id="kBookBtn">Записаться</button>
+        <!-- КНОПКА ПОДРОБНЕЕ -->
+        <div class="pt-4 border-t border-[#162e2a]">
+          <button onclick="openDetailsModal('karimov')" class="w-full btn-outline font-bold py-3 rounded-xl text-xs transition flex items-center justify-center space-x-2" id="kMoreBtn">
+            <span>Подробнее</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
         </div>
       </div>
 
       <!-- КАРТОЧКА: ИКРОМ АЗИМОВ -->
       <div class="card-bg rounded-2xl p-6 transition duration-300 flex flex-col justify-between space-y-6">
         <div class="space-y-4">
-          <!-- ФОТО И ОСНОВНЫЕ ДАННЫЕ -->
           <div class="flex items-start space-x-4">
             <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=250" alt="Икром Азимов" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500/40 shadow-md flex-shrink-0">
             <div class="space-y-1">
@@ -159,13 +147,11 @@
             </div>
           </div>
 
-          <!-- ЛИЦЕНЗИЯ -->
           <div class="bg-[#080f0e] border border-[#162e2a] rounded-xl px-4 py-2 flex items-center justify-between text-xs">
             <span class="text-slate-400" id="azimovLicLabel">Лицензия №</span>
             <span class="text-slate-200 font-mono font-bold">UZ-12855</span>
           </div>
 
-          <!-- ВЫИГРАННЫЕ ДЕЛА -->
           <div class="space-y-1.5">
             <div class="flex justify-between text-xs font-semibold">
               <span class="text-slate-300" id="azimovWinLabel">Выигранные дела / Yutuqlar</span>
@@ -176,7 +162,6 @@
             </div>
           </div>
 
-          <!-- ТЕГИ СПЕЦИАЛИЗАЦИИ -->
           <div class="flex flex-wrap gap-2 pt-2">
             <span class="bg-[#080f0e] border border-[#162e2a] text-slate-300 text-[11px] px-3 py-1.5 rounded-xl" id="aTag1">Гражданские дела</span>
             <span class="bg-[#080f0e] border border-[#162e2a] text-slate-300 text-[11px] px-3 py-1.5 rounded-xl" id="aTag2">Семейные споры</span>
@@ -184,10 +169,12 @@
           </div>
         </div>
 
-        <!-- КНОПКИ ДЕЙСТВИЯ -->
-        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-[#162e2a]">
-          <button onclick="openModal('ikrom')" class="btn-outline font-bold py-2.5 rounded-xl text-xs transition" id="aMoreBtn">Подробнее</button>
-          <button onclick="openModal('ikrom')" class="btn-emerald font-bold py-2.5 rounded-xl text-xs transition" id="aBookBtn">Записаться</button>
+        <!-- КНОПКА ПОДРОБНЕЕ -->
+        <div class="pt-4 border-t border-[#162e2a]">
+          <button onclick="openDetailsModal('ikrom')" class="w-full btn-outline font-bold py-3 rounded-xl text-xs transition flex items-center justify-center space-x-2" id="aMoreBtn">
+            <span>Подробнее</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
         </div>
       </div>
 
@@ -195,57 +182,106 @@
 
   </main>
 
-  <!-- ФУТЕР (Убраны ссылки на офисы) -->
+  <!-- ФУТЕР -->
   <footer class="border-t border-emerald-950/60 bg-[#080f0e] py-6 text-center">
     <div class="text-xs text-slate-400 font-medium tracking-wide" id="footerRights">
       © ADVOKATUZ • Все права защищены
     </div>
   </footer>
 
-  <!-- МОДАЛЬНОЕ ОКНО АНКЕТЫ ЗАПИСИ -->
-  <div id="bookingModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-[#0d1a18] border border-[#162e2a] rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-6 relative shadow-2xl">
+  <!-- МОДАЛЬНОЕ ОКНО: ИНФОРМАЦИЯ + ФОРМА -->
+  <div id="lawyerModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+    <div class="bg-[#0d1a18] border border-[#162e2a] rounded-3xl max-w-lg w-full overflow-hidden relative shadow-2xl my-8">
       
       <!-- КНОПКА ЗАКРЫТИЯ -->
-      <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+      <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/90 transition backdrop-blur-md">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <!-- ЗАГОЛОВОК ОКНА -->
-      <div class="space-y-1">
-        <h3 class="text-xl font-bold text-white font-serif" id="modalTitle">Запись на консультацию</h3>
-        <p class="text-xs text-emerald-400 font-semibold" id="selectedLawyerDisplay">Адвокат: Алишер Каримов</p>
+      <!-- ЭКРАН 1: ПОДРОБНОЕ ОПИСАНИЕ АДВОКАТА -->
+      <div id="detailsView" class="space-y-6 pb-6">
+        <!-- БОЛЬШОЕ ФОТО НА ВСЮ ШИРИНУ С ЗАКРУГЛЕНИЕМ УГЛОВ -->
+        <div class="relative h-64 sm:h-72 w-full overflow-hidden">
+          <img id="modalImg" src="" alt="Advokat" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0d1a18] via-[#0d1a18]/40 to-transparent"></div>
+          <div class="absolute bottom-4 left-6 right-6">
+            <span class="text-xs text-emerald-400 font-bold uppercase tracking-widest block mb-1" id="modalCityTag">ТАШКЕНТ</span>
+            <h3 class="text-2xl font-bold text-white font-serif" id="modalName">Имя Адвоката</h3>
+            <p class="text-xs text-slate-300 mt-1" id="modalSubtitle">Стаж 16 лет • Лицензия № UZ-16929</p>
+          </div>
+        </div>
+
+        <!-- ОПИСАНИЕ РАБОТЫ И ПОМОЩИ -->
+        <div class="px-6 space-y-4">
+          <div class="bg-[#080f0e] border border-[#162e2a] rounded-2xl p-4 space-y-2">
+            <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-2">
+              <i class="fa-solid fa-briefcase"></i>
+              <span id="modalSpecTitle">Специализация и помощь</span>
+            </h4>
+            <p class="text-xs text-slate-300 leading-relaxed" id="modalDescription">
+              Описание дел и услуг...
+            </p>
+          </div>
+
+          <div class="bg-[#080f0e] border border-[#162e2a] rounded-2xl p-4 space-y-2">
+            <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-2">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span id="modalHelpTitle">Чем я вам помогу:</span>
+            </h4>
+            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside" id="modalHelpList">
+              <!-- Список преимуществ -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- КНОПКА ПЕРЕХОДА К ЗАПИСИ -->
+        <div class="px-6 pt-2">
+          <button onclick="showBookingForm()" class="w-full btn-emerald font-bold py-3.5 rounded-xl text-xs sm:text-sm uppercase tracking-wider transition shadow-lg shadow-emerald-950/50 flex items-center justify-center space-x-2">
+            <i class="fa-regular fa-calendar-check text-base"></i>
+            <span id="modalBookBtn">Записаться на консультацию</span>
+          </button>
+        </div>
       </div>
 
-      <!-- ФОРМА АНКЕТЫ -->
-      <form id="leadForm" onsubmit="submitForm(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="nameLabel">Ваше имя</label>
-          <input type="text" id="clientName" required placeholder="Иван Иванов" class="w-full bg-[#080f0e] border border-[#162e2a] focus:border-emerald-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition">
+      <!-- ЭКРАН 2: ФОРМА ЗАПИСИ -->
+      <div id="bookingFormView" class="p-6 sm:p-8 space-y-6 hidden">
+        <div class="space-y-1">
+          <button onclick="showDetailsView()" class="text-xs text-emerald-400 font-semibold hover:underline flex items-center space-x-1 mb-2">
+            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            <span id="backToDetailsBtn">Назад к информации</span>
+          </button>
+          <h3 class="text-xl font-bold text-white font-serif" id="formModalTitle">Запись на консультацию</h3>
+          <p class="text-xs text-emerald-400 font-semibold" id="selectedLawyerDisplay">Адвокат: Алишер Каримов</p>
         </div>
 
-        <div>
-          <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="phoneLabel">Номер телефона</label>
-          <input type="tel" id="clientPhone" required placeholder="+998 90 123 45 67" class="w-full bg-[#080f0e] border border-[#162e2a] focus:border-emerald-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition">
+        <form id="leadForm" onsubmit="submitForm(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="nameLabel">Ваше имя</label>
+            <input type="text" id="clientName" required placeholder="Иван Иванов" class="w-full bg-[#080f0e] border border-[#162e2a] focus:border-emerald-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="phoneLabel">Номер телефона</label>
+            <input type="tel" id="clientPhone" required placeholder="+998 90 123 45 67" class="w-full bg-[#080f0e] border border-[#162e2a] focus:border-emerald-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="descLabel">Кратко опишите проблему</label>
+            <textarea id="clientDesc" rows="3" placeholder="Опишите ситуацию..." class="w-full bg-[#080f0e] border border-[#162e2a] focus:border-emerald-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full btn-emerald font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider transition shadow-lg shadow-emerald-950/50 flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span id="submitBtnText">Отправить анкету</span>
+          </button>
+        </form>
+
+        <div id="successMessage" class="hidden bg-emerald-950/80 border border-emerald-500/40 rounded-2xl p-6 text-center space-y-2">
+          <i class="fa-solid fa-circle-check text-emerald-400 text-4xl block mb-2"></i>
+          <h3 class="text-lg font-bold text-white" id="successTitle">Заявка успешно отправлена!</h3>
+          <p class="text-xs text-emerald-300" id="successText">Адвокат свяжется с вами в ближайшее время.</p>
+          <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold">Закрыть</button>
         </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" id="descLabel">Кратко опишите проблему</label>
-          <textarea id="clientDesc" rows="3" placeholder="Опишите ситуацию..." class="w-full bg-[#080f0e] border border-[#162e2a] focus:border-emerald-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition resize-none"></textarea>
-        </div>
-
-        <button type="submit" class="w-full btn-emerald font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider transition shadow-lg shadow-emerald-950/50 flex items-center justify-center space-x-2">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span id="submitBtnText">Отправить анкету</span>
-        </button>
-      </form>
-
-      <!-- УВЕДОМЛЕНИЕ ОБ УСПЕШНОЙ ОТПРАВКЕ -->
-      <div id="successMessage" class="hidden bg-emerald-950/80 border border-emerald-500/40 rounded-2xl p-6 text-center space-y-2">
-        <i class="fa-solid fa-circle-check text-emerald-400 text-4xl block mb-2"></i>
-        <h3 class="text-lg font-bold text-white" id="successTitle">Заявка успешно отправлена!</h3>
-        <p class="text-xs text-emerald-300" id="successText">Адвокат свяжется с вами в ближайшее время.</p>
-        <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold">Закрыть</button>
       </div>
 
     </div>
@@ -255,15 +291,58 @@
     let currentLawyer = 'karimov';
     let currentLang = 'ru';
 
-    const lawyersInfo = {
-      karimov: { ru: "Алишер Каримов", uz: "Alisher Karimov" },
-      ikrom: { ru: "Икром Азимов", uz: "Ikrom Azimov" }
+    const lawyersData = {
+      karimov: {
+        img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
+        ru: {
+          name: "Алишер Каримов",
+          subtitle: "Стаж 16 лет • Лицензия № UZ-16929",
+          description: "Специализируюсь на защите прав по уголовным и экономическим делам, а также юридическом сопровождении бизнеса. Помогаю урегулировать сложные правовые конфликты на любой стадии.",
+          helpList: [
+            "Полный анализ рисков и построение стратегии защиты",
+            "Защита на досудебном следствии и в суде",
+            "Минимизация финансовых и юридических потерь"
+          ]
+        },
+        uz: {
+          name: "Alisher Karimov",
+          subtitle: "Staj 16 yil • Litsenziya № UZ-16929",
+          description: "Jinoyat va iqtisodiy ishlar bo'yicha huquqlarni himoya qilish hamda biznesni huquqiy kuzatib borishga ixtisoslashganman. Har qanday bosqichda murakkab huquqiy nizolarni hal qilishga yordam beraman.",
+          helpList: [
+            "Xatarlarni to'liq tahlil qilish va himoya strategiyasini tuzish",
+            "Tergov va sud bosqichida huquqlarni himoya qilish",
+            "Moliyaviy va huquqiy yo'qotishlarni kamaytirish"
+          ]
+        }
+      },
+      ikrom: {
+        img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
+        ru: {
+          name: "Икром Азимов",
+          subtitle: "Стаж 14 лет • Лицензия № UZ-12855",
+          description: "Эксперт в области гражданского права, семейных и имущественных споров, а также коммерческого арбитража. Обеспечиваю надежную защиту интересов в суде.",
+          helpList: [
+            "Раздел имущества и семейные споры",
+            "Составление договорной базы и оспаривание сделок",
+            "Представительство в коммерческом арбитраже"
+          ]
+        },
+        uz: {
+          name: "Ikrom Azimov",
+          subtitle: "Staj 14 yil • Litsenziya № UZ-12855",
+          description: "Fuqarolik huquqi, oilaviy va mulkiy nizolar hamda tijorat arbitraji sohasida ekspert. Sudda manfaatlaringizni ishonchli himoya qilishni ta'minlayman.",
+          helpList: [
+            "Mulkni bo'lish va oilaviy nizolar",
+            "Shartnomalarni tuzish va bitimlarni bekor qilish",
+            "Tijorat arbitrajida vakillik qilish"
+          ]
+        }
+      }
     };
 
     const dict = {
       ru: {
         headerTag: "ЕДИНЫЙ РЕЕСТР АДВОКАТОВ",
-        navBookBtn: "Записаться",
         sectionTitle: "Список специалистов",
         lawyerCountText: 'Найдено адвокатов: <span class="text-emerald-400 font-bold">2</span>',
         sortLabel: "СОРТИРОВКА:",
@@ -277,8 +356,11 @@
         kTag1: "Уголовные дела", kTag2: "Защита бизнеса", kTag3: "Экономические преступления",
         aTag1: "Гражданские дела", aTag2: "Семейные споры", aTag3: "Арбитраж",
         moreBtn: "Подробнее",
-        bookBtn: "Записаться",
-        modalTitle: "Запись на консультацию",
+        modalSpecTitle: "Специализация и помощь",
+        modalHelpTitle: "Чем я вам помогу:",
+        modalBookBtn: "Записаться на консультацию",
+        backToDetailsBtn: "Назад к информации",
+        formModalTitle: "Запись на консультацию",
         selectedLawyerPrefix: "Адвокат: ",
         nameLabel: "Ваше имя",
         phoneLabel: "Номер телефона",
@@ -292,7 +374,6 @@
       },
       uz: {
         headerTag: "ADVOKATLAR YAGONA REESTRI",
-        navBookBtn: "Yozilish",
         sectionTitle: "Mutaxassislar ro'yxati",
         lawyerCountText: 'Topilgan advokatlar: <span class="text-emerald-400 font-bold">2</span>',
         sortLabel: "SARALASH:",
@@ -306,8 +387,11 @@
         kTag1: "Jinoyat ishlari", kTag2: "Biznesni himoya qilish", kTag3: "Iqtisodiy jinoyatlar",
         aTag1: "Fuqarolik ishlari", aTag2: "Oilaviy nizolar", aTag3: "Arbitraj",
         moreBtn: "Batafsil",
-        bookBtn: "Yozilish",
-        modalTitle: "Konsultatsiyaga yozilish",
+        modalSpecTitle: "Ixtisoslashuv va yordam",
+        modalHelpTitle: "Sizga qanday yordam bera olaman:",
+        modalBookBtn: "Konsultatsiyaga yozilish",
+        backToDetailsBtn: "Ma'lumotlarga qaytish",
+        formModalTitle: "Konsultatsiyaga yozilish",
         selectedLawyerPrefix: "Advokat: ",
         nameLabel: "Ismingiz",
         phoneLabel: "Telefon raqamingiz",
@@ -339,7 +423,6 @@
     function applyLang() {
       const d = dict[currentLang];
       document.getElementById('headerTag').innerText = d.headerTag;
-      document.getElementById('navBookBtn').innerText = d.navBookBtn;
       document.getElementById('sectionTitle').innerText = d.sectionTitle;
       document.getElementById('lawyerCountText').innerHTML = d.lawyerCountText;
       document.getElementById('sortLabel').innerText = d.sortLabel;
@@ -364,12 +447,14 @@
       document.getElementById('aTag2').innerText = d.aTag2;
       document.getElementById('aTag3').innerText = d.aTag3;
 
-      document.getElementById('kMoreBtn').innerText = d.moreBtn;
-      document.getElementById('kBookBtn').innerText = d.bookBtn;
-      document.getElementById('aMoreBtn').innerText = d.moreBtn;
-      document.getElementById('aBookBtn').innerText = d.bookBtn;
+      document.getElementById('kMoreBtn').querySelector('span').innerText = d.moreBtn;
+      document.getElementById('aMoreBtn').querySelector('span').innerText = d.moreBtn;
 
-      document.getElementById('modalTitle').innerText = d.modalTitle;
+      document.getElementById('modalSpecTitle').innerText = d.modalSpecTitle;
+      document.getElementById('modalHelpTitle').innerText = d.modalHelpTitle;
+      document.getElementById('modalBookBtn').innerText = d.modalBookBtn;
+      document.getElementById('backToDetailsBtn').innerText = d.backToDetailsBtn;
+      document.getElementById('formModalTitle').innerText = d.formModalTitle;
       document.getElementById('nameLabel').innerText = d.nameLabel;
       document.getElementById('phoneLabel').innerText = d.phoneLabel;
       document.getElementById('descLabel').innerText = d.descLabel;
@@ -381,25 +466,47 @@
       document.getElementById('successText').innerText = d.successText;
       document.getElementById('footerRights').innerText = d.footerRights;
 
-      updateSelectedLawyerDisplay();
+      updateModalContent();
     }
 
-    function openModal(lawyerId) {
+    function openDetailsModal(lawyerId) {
       currentLawyer = lawyerId;
-      updateSelectedLawyerDisplay();
+      updateModalContent();
+      showDetailsView();
+      document.getElementById('lawyerModal').classList.remove('hidden');
+    }
+
+    function updateModalContent() {
+      const data = lawyersData[currentLawyer];
+      const langData = data[currentLang];
+      const d = dict[currentLang];
+
+      document.getElementById('modalImg').src = data.img;
+      document.getElementById('modalCityTag').innerText = d.city;
+      document.getElementById('modalName').innerText = langData.name;
+      document.getElementById('modalSubtitle').innerText = langData.subtitle;
+      document.getElementById('modalDescription').innerText = langData.description;
+
+      const helpListEl = document.getElementById('modalHelpList');
+      helpListEl.innerHTML = langData.helpList.map(item => `<li>${item}</li>`).join('');
+
+      document.getElementById('selectedLawyerDisplay').innerText = `${d.selectedLawyerPrefix}${langData.name}`;
+    }
+
+    function showDetailsView() {
+      document.getElementById('detailsView').classList.remove('hidden');
+      document.getElementById('bookingFormView').classList.add('hidden');
+    }
+
+    function showBookingForm() {
+      document.getElementById('detailsView').classList.add('hidden');
+      document.getElementById('bookingFormView').classList.remove('hidden');
       document.getElementById('leadForm').classList.remove('hidden');
       document.getElementById('successMessage').classList.add('hidden');
-      document.getElementById('bookingModal').classList.remove('hidden');
     }
 
     function closeModal() {
-      document.getElementById('bookingModal').classList.add('hidden');
-    }
-
-    function updateSelectedLawyerDisplay() {
-      const d = dict[currentLang];
-      const lawyerName = lawyersInfo[currentLawyer][currentLang];
-      document.getElementById('selectedLawyerDisplay').innerText = `${d.selectedLawyerPrefix}${lawyerName}`;
+      document.getElementById('lawyerModal').classList.add('hidden');
     }
 
     async function submitForm(e) {
