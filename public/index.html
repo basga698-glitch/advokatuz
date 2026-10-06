@@ -47,7 +47,7 @@
       <!-- ЛОГОТИП -->
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xl shadow-lg">
-          ⚖️
+          ⚖️️
         </div>
         <div>
           <span class="text-xl font-bold text-white tracking-tight block leading-none">advokat<span class="text-emerald-400">uz</span></span>
@@ -90,7 +90,7 @@
       <div class="card-bg rounded-2xl p-6 transition duration-300 flex flex-col justify-between space-y-6">
         <div class="space-y-4">
           <div class="flex items-start space-x-4">
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=250" alt="Алишер Каримов" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500/40 shadow-md flex-shrink-0">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=300" alt="Алишер Каримов" class="w-20 h-20 rounded-2xl object-cover object-top border-2 border-emerald-500/40 shadow-md flex-shrink-0">
             <div class="space-y-1">
               <div class="flex items-center space-x-1.5 text-xs text-emerald-400 font-semibold uppercase tracking-wider">
                 <i class="fa-solid fa-location-dot text-[10px]"></i>
@@ -136,7 +136,7 @@
       <div class="card-bg rounded-2xl p-6 transition duration-300 flex flex-col justify-between space-y-6">
         <div class="space-y-4">
           <div class="flex items-start space-x-4">
-            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=250" alt="Икром Азимов" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500/40 shadow-md flex-shrink-0">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=300" alt="Икром Азимов" class="w-20 h-20 rounded-2xl object-cover object-top border-2 border-emerald-500/40 shadow-md flex-shrink-0">
             <div class="space-y-1">
               <div class="flex items-center space-x-1.5 text-xs text-emerald-400 font-semibold uppercase tracking-wider">
                 <i class="fa-solid fa-location-dot text-[10px]"></i>
@@ -194,43 +194,56 @@
     <div class="bg-[#0d1a18] border border-[#162e2a] rounded-3xl max-w-lg w-full overflow-hidden relative shadow-2xl my-8">
       
       <!-- КНОПКА ЗАКРЫТИЯ -->
-      <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/90 transition backdrop-blur-md">
+      <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/90 transition backdrop-blur-md">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
       <!-- ЭКРАН 1: ПОДРОБНОЕ ОПИСАНИЕ АДВОКАТА -->
-      <div id="detailsView" class="space-y-6 pb-6">
-        <!-- БОЛЬШОЕ ФОТО НА ВСЮ ШИРИНУ С ЗАКРУГЛЕНИЕМ УГЛОВ -->
-        <div class="relative h-64 sm:h-72 w-full overflow-hidden">
-          <img id="modalImg" src="" alt="Advokat" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#0d1a18] via-[#0d1a18]/40 to-transparent"></div>
-          <div class="absolute bottom-4 left-6 right-6">
-            <span class="text-xs text-emerald-400 font-bold uppercase tracking-widest block mb-1" id="modalCityTag">ТАШКЕНТ</span>
+      <div id="detailsView" class="space-y-5 pb-6">
+        <!-- БОЛЬШОЕ ФОТО (ЛИЦО ЧЕТКО ВИДНО) -->
+        <div class="relative h-56 sm:h-64 w-full overflow-hidden bg-slate-900">
+          <img id="modalImg" src="" alt="Advokat" class="w-full h-full object-cover object-top">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0d1a18] via-[#0d1a18]/30 to-transparent"></div>
+          <div class="absolute bottom-3 left-6 right-6">
+            <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest block mb-0.5" id="modalCityTag">ТАШКЕНТ</span>
             <h3 class="text-2xl font-bold text-white font-serif" id="modalName">Имя Адвоката</h3>
-            <p class="text-xs text-slate-300 mt-1" id="modalSubtitle">Стаж 16 лет • Лицензия № UZ-16929</p>
+            <p class="text-xs text-slate-300 mt-0.5" id="modalSubtitle">Лицензия № UZ-16929</p>
           </div>
         </div>
 
-        <!-- ОПИСАНИЕ РАБОТЫ И ПОМОЩИ -->
         <div class="px-6 space-y-4">
+          <!-- РЕЙТИНГ И СТАЖ -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-[#080f0e] border border-[#162e2a] rounded-2xl p-3 flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-sm">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase font-bold" id="ratingLabel">Рейтинг</span>
+                <span class="text-sm font-bold text-white" id="modalRating">4.9 ★</span>
+              </div>
+            </div>
+
+            <div class="bg-[#080f0e] border border-[#162e2a] rounded-2xl p-3 flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-sm">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase font-bold" id="experienceLabel">Опыт работы</span>
+                <span class="text-sm font-bold text-white" id="modalExp">16 лет</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ОПИСАНИЕ ОПЫТА -->
           <div class="bg-[#080f0e] border border-[#162e2a] rounded-2xl p-4 space-y-2">
             <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-2">
-              <i class="fa-solid fa-briefcase"></i>
-              <span id="modalSpecTitle">Специализация и помощь</span>
+              <i class="fa-solid fa-user-shield"></i>
+              <span id="modalSpecTitle">О квалификации и практике</span>
             </h4>
             <p class="text-xs text-slate-300 leading-relaxed" id="modalDescription">
               Описание дел и услуг...
             </p>
-          </div>
-
-          <div class="bg-[#080f0e] border border-[#162e2a] rounded-2xl p-4 space-y-2">
-            <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-2">
-              <i class="fa-solid fa-shield-halved"></i>
-              <span id="modalHelpTitle">Чем я вам помогу:</span>
-            </h4>
-            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside" id="modalHelpList">
-              <!-- Список преимуществ -->
-            </ul>
           </div>
         </div>
 
@@ -294,48 +307,34 @@
     const lawyersData = {
       karimov: {
         img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
+        rating: "4.9 ★",
+        expRu: "16 лет",
+        expUz: "16 yil",
         ru: {
           name: "Алишер Каримов",
-          subtitle: "Стаж 16 лет • Лицензия № UZ-16929",
-          description: "Специализируюсь на защите прав по уголовным и экономическим делам, а также юридическом сопровождении бизнеса. Помогаю урегулировать сложные правовые конфликты на любой стадии.",
-          helpList: [
-            "Полный анализ рисков и построение стратегии защиты",
-            "Защита на досудебном следствии и в суде",
-            "Минимизация финансовых и юридических потерь"
-          ]
+          subtitle: "Лицензия № UZ-16929",
+          description: "Адвокат с 16-летним практическим стажем. Специализируется на защите физических и юридических лиц в уголовных и экономических процессах, а также на защите бизнес-активов."
         },
         uz: {
           name: "Alisher Karimov",
-          subtitle: "Staj 16 yil • Litsenziya № UZ-16929",
-          description: "Jinoyat va iqtisodiy ishlar bo'yicha huquqlarni himoya qilish hamda biznesni huquqiy kuzatib borishga ixtisoslashganman. Har qanday bosqichda murakkab huquqiy nizolarni hal qilishga yordam beraman.",
-          helpList: [
-            "Xatarlarni to'liq tahlil qilish va himoya strategiyasini tuzish",
-            "Tergov va sud bosqichida huquqlarni himoya qilish",
-            "Moliyaviy va huquqiy yo'qotishlarni kamaytirish"
-          ]
+          subtitle: "Litsenziya № UZ-16929",
+          description: "16 yillik amaliy tajribaga ega advokat. Jinoyat va iqtisodiy jarayonlarda jismoniy va yuridik shaxslarni himoya qilish hamda biznes aktivlarini himoyalashga ixtisoslashgan."
         }
       },
       ikrom: {
         img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
+        rating: "4.8 ★",
+        expRu: "14 лет",
+        expUz: "14 yil",
         ru: {
           name: "Икром Азимов",
-          subtitle: "Стаж 14 лет • Лицензия № UZ-12855",
-          description: "Эксперт в области гражданского права, семейных и имущественных споров, а также коммерческого арбитража. Обеспечиваю надежную защиту интересов в суде.",
-          helpList: [
-            "Раздел имущества и семейные споры",
-            "Составление договорной базы и оспаривание сделок",
-            "Представительство в коммерческом арбитраже"
-          ]
+          subtitle: "Лицензия № UZ-12855",
+          description: "Опытный специалист в области гражданского права, имущественных и семейных споров, а также коммерческого арбитража. Обеспечивает профессиональную защиту прав в судах."
         },
         uz: {
           name: "Ikrom Azimov",
-          subtitle: "Staj 14 yil • Litsenziya № UZ-12855",
-          description: "Fuqarolik huquqi, oilaviy va mulkiy nizolar hamda tijorat arbitraji sohasida ekspert. Sudda manfaatlaringizni ishonchli himoya qilishni ta'minlayman.",
-          helpList: [
-            "Mulkni bo'lish va oilaviy nizolar",
-            "Shartnomalarni tuzish va bitimlarni bekor qilish",
-            "Tijorat arbitrajida vakillik qilish"
-          ]
+          subtitle: "Litsenziya № UZ-12855",
+          description: "Fuqarolik huquqi, mulkiy va oilaviy nizolar hamda tijorat arbitraji sohasidagi tajribali mutaxassis. Sudlarda huquqlarni professional darajada himoya qilishni ta'minlaydi."
         }
       }
     };
@@ -356,8 +355,9 @@
         kTag1: "Уголовные дела", kTag2: "Защита бизнеса", kTag3: "Экономические преступления",
         aTag1: "Гражданские дела", aTag2: "Семейные споры", aTag3: "Арбитраж",
         moreBtn: "Подробнее",
-        modalSpecTitle: "Специализация и помощь",
-        modalHelpTitle: "Чем я вам помогу:",
+        ratingLabel: "Рейтинг",
+        experienceLabel: "Опыт работы",
+        modalSpecTitle: "О квалификации и практике",
         modalBookBtn: "Записаться на консультацию",
         backToDetailsBtn: "Назад к информации",
         formModalTitle: "Запись на консультацию",
@@ -387,8 +387,9 @@
         kTag1: "Jinoyat ishlari", kTag2: "Biznesni himoya qilish", kTag3: "Iqtisodiy jinoyatlar",
         aTag1: "Fuqarolik ishlari", aTag2: "Oilaviy nizolar", aTag3: "Arbitraj",
         moreBtn: "Batafsil",
-        modalSpecTitle: "Ixtisoslashuv va yordam",
-        modalHelpTitle: "Sizga qanday yordam bera olaman:",
+        ratingLabel: "Reyting",
+        experienceLabel: "Ish staji",
+        modalSpecTitle: "Malaka va amaliyot haqida",
         modalBookBtn: "Konsultatsiyaga yozilish",
         backToDetailsBtn: "Ma'lumotlarga qaytish",
         formModalTitle: "Konsultatsiyaga yozilish",
@@ -450,8 +451,9 @@
       document.getElementById('kMoreBtn').querySelector('span').innerText = d.moreBtn;
       document.getElementById('aMoreBtn').querySelector('span').innerText = d.moreBtn;
 
+      document.getElementById('ratingLabel').innerText = d.ratingLabel;
+      document.getElementById('experienceLabel').innerText = d.experienceLabel;
       document.getElementById('modalSpecTitle').innerText = d.modalSpecTitle;
-      document.getElementById('modalHelpTitle').innerText = d.modalHelpTitle;
       document.getElementById('modalBookBtn').innerText = d.modalBookBtn;
       document.getElementById('backToDetailsBtn').innerText = d.backToDetailsBtn;
       document.getElementById('formModalTitle').innerText = d.formModalTitle;
@@ -486,9 +488,8 @@
       document.getElementById('modalName').innerText = langData.name;
       document.getElementById('modalSubtitle').innerText = langData.subtitle;
       document.getElementById('modalDescription').innerText = langData.description;
-
-      const helpListEl = document.getElementById('modalHelpList');
-      helpListEl.innerHTML = langData.helpList.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('modalRating').innerText = data.rating;
+      document.getElementById('modalExp').innerText = (currentLang === 'ru') ? data.expRu : data.expUz;
 
       document.getElementById('selectedLawyerDisplay').innerText = `${d.selectedLawyerPrefix}${langData.name}`;
     }
